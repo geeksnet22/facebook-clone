@@ -1,0 +1,33 @@
+.feed {
+    flex: 0.6;
+    border-radius: 20px;
+    padding: 0 200px;
+}
+
+.feed__input__container {
+    display: flex;
+}
+
+.feed__input {
+    flex: 1;
+    padding: 5px;
+    margin-left: 10px;
+    display: flex;
+    border-radius: 15px;
+    border: 1px solid black;
+    background-color: var(--searchBackground);
+    align-items: center;
+}
+
+.feed__input > form > input {
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background-color: var(--searchBackground);
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.feed__input > form > button {
+    display: none;
+}

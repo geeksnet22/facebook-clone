@@ -1,0 +1,26 @@
+.post {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: red;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.post__header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.post__header > h2 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.post__message > p{
+    color: #ffffff;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
