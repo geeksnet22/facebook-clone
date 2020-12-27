@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Avatar } from '@material-ui/core'
 import './Post.css'
 
-function Post({name, message, photoURL}) {
+const Post = forwardRef(({name, message, photoURL}, ref) => {
 
     return (
-        <div className="post">
+        <div ref={ref} className="post">
             <div className="post__header">
                 <Avatar src={photoURL}/>
                 <h2>{name}</h2>
@@ -18,6 +18,6 @@ function Post({name, message, photoURL}) {
             </div>
         </div>
     )
-}
+})
 
 export default Post

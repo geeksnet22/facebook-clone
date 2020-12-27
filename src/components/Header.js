@@ -43,10 +43,10 @@ function Header() {
                 </div>
             </div>
             <div className="header__center">
-                <HomeOutlinedIcon style={{color: "#ffffff"}}/>
-                <PeopleAltOutlinedIcon style={{color: "#ffffff"}}/>
-                <ShopTwoOutlinedIcon style={{color: "#ffffff"}}/>
-                <SupervisedUserCircleOutlinedIcon style={{color: "#ffffff"}}/>
+                <HomeOutlinedIcon fontSize="large" style={{color: "#ffffff"}}/>
+                <PeopleAltOutlinedIcon fontSize="large"  style={{color: "#ffffff"}}/>
+                <ShopTwoOutlinedIcon fontSize="large"  style={{color: "#ffffff"}}/>
+                <SupervisedUserCircleOutlinedIcon fontSize="large"  style={{color: "#ffffff"}}/>
             </div>
             <div className="header__right">
                 <div className="user_identity">

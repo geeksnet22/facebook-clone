@@ -6,6 +6,7 @@ import './Feed.css'
 import { db } from '../Firebase'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
+import FlipMove from 'react-flip-move';
 
 function Feed() {
     const user = useSelector(selectUser)
@@ -39,18 +40,20 @@ function Feed() {
                 <Avatar />
                 <div className="feed__input">
                     <form>
-                        <input size="50" type="text" onChange={(e) => setInput(e.target.value)} placeholder="What's on your mind, Guri?" />
+                        <input value={input} type="text" onChange={(e) => setInput(e.target.value)} placeholder={`What's on your mind, ${user.displayName?.split(' ')[0] || 'user'}?`} />
                         <button onClick={sendPost} type="submit">Submit</button>
                     </form>
                 </div>
             </div>
-            {posts.map(({id, data: {name, message, photoURL}}) => (
-                <Post key={id}
-                    name={name}
-                    message={message}
-                    photoURL={photoURL}    
-                />
-            ))}
+            <FlipMove>
+                {posts.map(({id, data: {name, message, photoURL}}) => (
+                    <Post key={id}
+                        name={name}
+                        message={message}
+                        photoURL={photoURL}    
+                    />
+                ))}
+            </FlipMove>
         </div>
     )
 }
