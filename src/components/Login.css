@@ -20,6 +20,7 @@
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0.5px 0.5px 0.5px 0.5px;
+    align-items: center;
 }
 
 .login > form > input {
@@ -39,4 +40,10 @@
     height: 50px;
     border-radius: 10px;
     background-color: #4267B2;
+}
+
+.login > form > p:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+    text-decoration: underline;
 }

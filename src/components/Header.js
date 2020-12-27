@@ -51,7 +51,7 @@ function Header() {
             <div className="header__right">
                 <div className="user_identity">
                     <Avatar />
-                    <h4>{user.displayName.split(" ")[0]}</h4>
+                    <h4>{user.displayName?.split(" ")[0]}</h4>
                 </div>
                 <div className="header__right__icons">
                     <AddRoundedIcon />

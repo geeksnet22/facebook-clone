@@ -14,7 +14,7 @@ function Sidebar() {
         <div className="sidebar">
             <div className="user__identity">
                 <Avatar />
-                <h4>{user.displayName.split(" ")[0]}</h4>
+                <h4>{user.displayName?.split(" ")[0]}</h4>
             </div>
             <SidebarItem Icon={PeopleAltIcon} text="Friends"/>
             <SidebarItem Icon={PeopleAltIcon} text="Groups"/>

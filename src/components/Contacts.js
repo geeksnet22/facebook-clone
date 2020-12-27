@@ -1,21 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/userSlice'
+import { db } from '../Firebase'
 import ContactItem from './ContactItem'
 import './Contacts.css'
 
 function Contacts() {
+    const user = useSelector(selectUser)
+    const [contacts, setContacts] = useState([])
+    useEffect(() => {
+        db.collection("users").onSnapshot((snapshot) => (
+            setContacts(snapshot.docs.map((doc) => (
+                {
+                    id: doc.id,
+                    data: doc.data(),
+                }
+            )))
+        ));
+    }, [])
+
     return (
         <div className="contacts">
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
-            <ContactItem imgSrc="" name="Friend"/>
+            <h2>Contacts</h2>
+            {contacts.map(({id, data: {name, email, photoURL}}) => (
+                email !== user.email && <ContactItem key={id}
+                            name={name}
+                            photoURL={photoURL}/>
+            ))}
         </div>
     )
 }

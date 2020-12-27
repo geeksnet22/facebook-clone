@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../features/userSlice'
-import { auth } from '../Firebase'
+import { auth, db } from '../Firebase'
 import './Login.css'
 
 function Login() {
@@ -43,7 +43,11 @@ function Login() {
                     photoURL: photoURL
                 }
             ))
-        })
+        }).then(db.collection("users").add({
+            email: email,
+            name: name,
+            photoURL: photoURL,
+        }))
         }).catch(error => alert(error))
     }
 
@@ -56,7 +60,7 @@ function Login() {
                 <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                 <button type="submit" onClick={signin}>Log In</button>
-                <button type="submit" onClick={register}>Sign Up</button>
+                <p onClick={register}>Not a member yet? Sign Up</p>
             </form>
         </div>
     )
