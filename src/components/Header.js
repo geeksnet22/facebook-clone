@@ -10,13 +10,22 @@ import ChatBubbleRoundedIcon from '@material-ui/icons/ChatBubbleRounded'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import ArrowDropDownRoundedIcon from '@material-ui/icons/ArrowDropDownRounded'
 import './Header.css'
+import { useDispatch } from 'react-redux'
+import { logout } from '../features/userSlice'
+import { auth } from '../Firebase';
 
 function Header() {
 
     const [searchText, setSearchText] = useState("")
+    const dispatch = useDispatch()
 
     const processSearch = e => {
         e.preventDefault()
+    }
+
+    const signout = () => {
+        dispatch(logout())
+        auth.signOut()
     }
 
     return (
@@ -46,7 +55,7 @@ function Header() {
                     <AddRoundedIcon />
                     <ChatBubbleRoundedIcon />
                     <NotificationsIcon />
-                    <ArrowDropDownRoundedIcon />
+                    <ArrowDropDownRoundedIcon onClick={signout}/>
                 </div>
             </div>
         </div>

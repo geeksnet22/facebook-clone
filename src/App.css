@@ -1,7 +1,8 @@
 :root {
-  --headerBackground: #0f142a;
-  --bodyBackground: #050b23;
-  --searchBackground: #3f4662;
+  --headerBackground: #404040;
+  --bodyBackground: #181818;
+  --searchBackground: #737373;
+  --postBackground: #404040;
 }
 
 * {
