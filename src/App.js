@@ -10,20 +10,20 @@ import { selectUser, login, logout } from './features/userSlice'
 import { auth } from './Firebase'
 
 function App() {
-
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
       if (userAuth) {
+        console.log("useEffect " + userAuth.displayName)
         //user is logged in
         // send user info to redux store
         dispatch(
           login({
             email: userAuth.email,
             uid: userAuth.uid,
-            displaName: userAuth.displayName,
+            displayName: userAuth.displayName,
             photoURL: userAuth.photoURL
           })
         )

@@ -1,10 +1,21 @@
 import React from 'react'
+import ContactItem from './ContactItem'
 import './Contacts.css'
 
 function Contacts() {
     return (
         <div className="contacts">
-            This is contacts widget
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
+            <ContactItem imgSrc="" name="Friend"/>
         </div>
     )
 }

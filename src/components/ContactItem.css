@@ -1,0 +1,11 @@
+.contactItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.contactItem > h4 {
+    margin-left: 10px;
+    font-size: 15px;
+    color: #ffffff;
+}

@@ -12,6 +12,13 @@
 
 .body {
   display: flex;
+  justify-content: space-between;
   background-color: var(--bodyBackground);
   padding-top: 30px;
+}
+
+@media only screen and (max-width: 900px) {
+  .body {
+    justify-content: center;
+  }
 }

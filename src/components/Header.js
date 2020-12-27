@@ -10,12 +10,14 @@ import ChatBubbleRoundedIcon from '@material-ui/icons/ChatBubbleRounded'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import ArrowDropDownRoundedIcon from '@material-ui/icons/ArrowDropDownRounded'
 import './Header.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/userSlice'
-import { auth } from '../Firebase';
+import { auth } from '../Firebase'
+import { selectUser } from '../features/userSlice'
 
 function Header() {
 
+    const user = useSelector(selectUser)
     const [searchText, setSearchText] = useState("")
     const dispatch = useDispatch()
 
@@ -49,7 +51,7 @@ function Header() {
             <div className="header__right">
                 <div className="user_identity">
                     <Avatar />
-                    <h4>Guri</h4>
+                    <h4>{user.displayName.split(" ")[0]}</h4>
                 </div>
                 <div className="header__right__icons">
                     <AddRoundedIcon />

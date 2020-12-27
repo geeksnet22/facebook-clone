@@ -19,9 +19,9 @@ function Login() {
         .then(userAuth => dispatch(login({
             email: userAuth.user.email,
             uid: userAuth.user.uid,
-            displaName: userAuth.user.displayName,
+            displayName: userAuth.user.displayName,
             photoURL: userAuth.user.photoURL
-        })))
+        }))).catch(error => alert(error))
     }
 
     const register = (e) => {
@@ -29,20 +29,21 @@ function Login() {
         if (!name) {
             return alert("Full name is required for sign up")
         }
+        console.log(name)
         auth.createUserWithEmailAndPassword(email, password)
         .then(userAuth => { userAuth.user.updateProfile({
             displayName: name,
             photoURL: photoURL
-        }).then(
+        }).then(() => {
             dispatch(login(
                 {
                     email: userAuth.user.email,
                     uid: userAuth.user.uid,
-                    displaName: name,
+                    displayName: name,
                     photoURL: photoURL
                 }
             ))
-        )
+        })
         }).catch(error => alert(error))
     }
 

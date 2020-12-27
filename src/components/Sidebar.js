@@ -2,14 +2,19 @@ import React from 'react'
 import { Avatar } from '@material-ui/core'
 import SidebarItem from './SidebarItem'
 import './Sidebar.css'
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/userSlice'
 
 function Sidebar() {
+
+    const user = useSelector(selectUser)
+
     return (
         <div className="sidebar">
             <div className="user__identity">
                 <Avatar />
-                <h4>Guri</h4>
+                <h4>{user.displayName.split(" ")[0]}</h4>
             </div>
             <SidebarItem Icon={PeopleAltIcon} text="Friends"/>
             <SidebarItem Icon={PeopleAltIcon} text="Groups"/>

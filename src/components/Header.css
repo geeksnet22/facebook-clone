@@ -91,6 +91,10 @@
     margin-left: 15px;
 }
 
+.header__right__icons > *:hover {
+    background-color: var(--bodyBackground);
+}
+
 @media only screen and (max-width: 1200px) {
     .header__center > * {
         padding-left: 20px;
