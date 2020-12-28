@@ -50,7 +50,7 @@ function Header() {
             </div>
             <div className="header__right">
                 <div className="user_identity">
-                    <Avatar style={{height: "37px", width: "37px"}}/>
+                    <Avatar style={{height: "37px", width: "37px"}} src={user.displayName}/>
                     <h4>{user.displayName?.split(" ")[0]}</h4>
                 </div>
                 <div className="header__right__icons">
