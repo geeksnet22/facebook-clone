@@ -60,7 +60,7 @@ function Login() {
                 <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                 <button type="submit" onClick={signin}>Log In</button>
-                <p onClick={register}>Not a member yet? Sign Up</p>
+                <p>Not a member yet? <span onClick={register}>Sign up</span></p>
             </form>
         </div>
     )

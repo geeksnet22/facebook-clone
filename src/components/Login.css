@@ -35,6 +35,8 @@
 }
 
 .login > form > button {
+    color: #ffffff;
+    font-size: 15px;
     margin: 5px 0;
     width: 365px;
     height: 50px;
@@ -42,7 +44,7 @@
     background-color: #4267B2;
 }
 
-.login > form > p:hover {
+.login > form > p > span:hover {
     cursor: pointer;
     background-color: whitesmoke;
     text-decoration: underline;
@@ -51,20 +53,9 @@
 @media only screen and (max-width: 500px) {
     .login > form > input {
         width: 300px;
-        height: 50px;
-        outline: none;
-        margin: 5px 0;
-        padding-left: 10px;
-        border-radius: 10px;
-        border: none;
-        background-color: #FFF192;
     }
     
     .login > form > button {
-        margin: 5px 0;
         width: 315px;
-        height: 50px;
-        border-radius: 10px;
-        background-color: #4267B2;
     }
 }
