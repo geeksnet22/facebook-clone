@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/userSlice'
 import { auth } from '../Firebase'
 import { selectUser } from '../features/userSlice'
+import HeaderIcons from './HeaderIcons';
 
 function Header() {
 
@@ -43,14 +44,14 @@ function Header() {
                 </div>
             </div>
             <div className="header__center">
-                <HomeOutlinedIcon fontSize="large" style={{color: "#ffffff"}}/>
-                <PeopleAltOutlinedIcon fontSize="large"  style={{color: "#ffffff"}}/>
-                <ShopTwoOutlinedIcon fontSize="large"  style={{color: "#ffffff"}}/>
-                <SupervisedUserCircleOutlinedIcon fontSize="large"  style={{color: "#ffffff"}}/>
+                <HeaderIcons Icon={HomeOutlinedIcon}/>
+                <HeaderIcons Icon={PeopleAltOutlinedIcon}/>
+                <HeaderIcons Icon={ShopTwoOutlinedIcon}/>
+                <HeaderIcons Icon={SupervisedUserCircleOutlinedIcon}/>
             </div>
             <div className="header__right">
                 <div className="user_identity">
-                    <Avatar style={{height: "37px", width: "37px"}} src={user.displayName}/>
+                    <Avatar style={{height: "37px", width: "37px"}} src={user.photoURL}/>
                     <h4>{user.displayName?.split(" ")[0]}</h4>
                 </div>
                 <div className="header__right__icons">

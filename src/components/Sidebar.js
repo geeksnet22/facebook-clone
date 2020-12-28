@@ -13,7 +13,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <div className="user__identity">
-                <Avatar src={user.displayName} />
+                <Avatar src={user.photoURL} />
                 <h4>{user.displayName?.split(" ")[0]}</h4>
             </div>
             <SidebarItem Icon={PeopleAltIcon} text="Friends"/>

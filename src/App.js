@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
       if (userAuth) {
-        console.log("useEffect " + userAuth.displayName)
         //user is logged in
         // send user info to redux store
         dispatch(

@@ -33,11 +33,10 @@ function Feed() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(error => alert(error))
     }
-
     return (
         <div className="feed">
             <div className="feed__input__container">
-                <Avatar src={user.displayName} />
+                <Avatar src={user.photoURL} />
                 <div className="feed__input">
                     <form>
                         <input value={input} type="text" onChange={(e) => setInput(e.target.value)} placeholder={`What's on your mind, ${user.displayName?.split(' ')[0] || 'user'}?`} />
