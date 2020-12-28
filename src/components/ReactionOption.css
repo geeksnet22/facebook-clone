@@ -4,6 +4,10 @@
     color: white;
 }
 
+.reactionOption.liked {
+    color: var(--blueColor);
+}
+
 .reactionOption > p {
     margin-left: 5px;
 }

@@ -6,10 +6,39 @@ import ReactionOption from './ReactionOption'
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import SharedOutlinedIcon from '@material-ui/icons/ShareOutlined';
-import SendOutlined from '@material-ui/icons/SendOutlined';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
+import { db } from '../Firebase';
+import firebase from 'firebase'
 
-const Post = forwardRef(({name, message, photoURL}, ref) => {
+const Post = forwardRef(({docId, name, message, photoURL, likes, comments, shares}, ref) => {
 
+    const user = useSelector(selectUser)
+
+    const processLike = () => {
+        // get document reference
+        var postRef = db.collection("posts").doc(docId)
+        // if the post is currently liked by the user
+        if ( !likes.includes(user.email) ) {
+            postRef.update({
+                likes: firebase.firestore.FieldValue.arrayUnion(user.email)
+            });
+        }
+        else {
+            postRef.update({
+                likes: firebase.firestore.FieldValue.arrayRemove(user.email)
+            });
+        }
+    }
+
+    const processComment = () => {
+
+    }
+
+    const processShare = () => {
+
+    }
+    
     return (
         <div ref={ref} className="post">
             <div className="post__header">
@@ -22,17 +51,18 @@ const Post = forwardRef(({name, message, photoURL}, ref) => {
             <div className="post__reactions">
                 <div className="likes__container">
                     <ThumbUpIcon fontSize="inherit"/>
-                    <p>0 likes</p>
+                    <p>{likes.length} likes</p>
                 </div>
                 <div className="comments__shares__container">
-                    <p>0 comments</p>
-                    <p>0 shares</p>
+                    <p>{comments.length} comments</p>
+                    <p>{shares.length} shares</p>
                 </div>
             </div>
             <div className="post__buttons__container">
-                <ReactionOption Icon={ThumbUpAltOutlinedIcon} text="Like"/>
-                <ReactionOption Icon={ChatOutlinedIcon} text="Comment" />
-                <ReactionOption Icon={SharedOutlinedIcon} text="Share" />
+                <ReactionOption Icon={ThumbUpAltOutlinedIcon} text="Like" onClick={processLike} 
+                    isLiked={likes.includes(user.email)}/>
+                <ReactionOption Icon={ChatOutlinedIcon} text="Comment" onClick={processComment} />
+                <ReactionOption Icon={SharedOutlinedIcon} text="Share" onClick={processShare} />
             </div>
         </div>
     )
