@@ -9,6 +9,15 @@
     display: flex;
 }
 
+.feed__input__container > .feed__input > form {
+    display: flex;
+    flex: 1;
+}
+
+.feed__input__container > .feed__input > form > input {
+    flex: 1;
+}
+
 .feed__input {
     flex: 1;
     padding: 5px;

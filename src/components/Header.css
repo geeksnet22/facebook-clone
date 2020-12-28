@@ -86,7 +86,7 @@
 .header__right__icons {
     display: flex;
     justify-content: space-evenly;
-    padding: 0 10px;
+    padding-right: 10px;
 }
 
 .header__right__icons > * {
