@@ -33,7 +33,7 @@ function Header() {
     return (
         <div className="header">
             <div className="header__left">
-                <Avatar src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png"/>
+                <Avatar style={{height: "40px"}} src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png"/>
                 <div className="search__field">
                     <SearchIcon />
                     <form>
@@ -50,7 +50,7 @@ function Header() {
             </div>
             <div className="header__right">
                 <div className="user_identity">
-                    <Avatar />
+                    <Avatar style={{height: "37px", width: "37px"}}/>
                     <h4>{user.displayName?.split(" ")[0]}</h4>
                 </div>
                 <div className="header__right__icons">

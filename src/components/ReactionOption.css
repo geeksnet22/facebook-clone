@@ -1,0 +1,9 @@
+.reactionOption {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.reactionOption > p {
+    margin-left: 5px;
+}

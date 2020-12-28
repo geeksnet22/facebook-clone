@@ -19,6 +19,7 @@
 
 .header__left {
     display: flex;
+    flex: 0.2;
     align-items: center;
 }
 
@@ -47,12 +48,14 @@
 
 .header__center {
     display: flex;
+    flex: 0.6;
+    justify-content: space-evenly;
     align-items: center;
+    max-width: 700px;
 }
 
 .header__center > * {
-    padding-left: 40px;
-    padding-right: 40px;
+    width: 100%;
     padding-top: 6px;
     padding-bottom: 6px;
     border-radius: 10px;
@@ -65,7 +68,8 @@
 
 .header__right {
     display: flex;
-    align-items: center;
+    flex: 0.2;
+    align-items: flex-end;
 }
 
 .user_identity {
@@ -81,23 +85,43 @@
 
 .header__right__icons {
     display: flex;
+    justify-content: space-evenly;
+    padding: 0 10px;
 }
 
 .header__right__icons > * {
     color: #ffffff;
-    padding: 9px;
+    padding: 7px;
     background-color: var(--searchBackground);
     border-radius: 50%;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .header__right__icons > *:hover {
-    background-color: var(--bodyBackground);
+    background-color: gray;
+    cursor: pointer;
 }
 
-@media only screen and (max-width: 1200px) {
-    .header__center > * {
-        padding-left: 20px;
-        padding-right: 20px;
+@media only screen and (max-width: 1260px) {
+    .user_identity {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .header__center {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .search__field > form > input {
+        width: 100px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .search__field > form > input {
+        width: 60px;
     }
 }
