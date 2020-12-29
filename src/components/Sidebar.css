@@ -1,6 +1,7 @@
 .sidebar {
     flex: 0.2;
     padding-left: 20px;
+    overflow: scroll;
 }
 
 .user__identity {

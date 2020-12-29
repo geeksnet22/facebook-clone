@@ -6,6 +6,17 @@
   --blueColor: #4267B2;
 }
 
+.app {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--bodyBackground);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,9 +25,7 @@
 .body {
   display: flex;
   justify-content: space-between;
-  background-color: var(--bodyBackground);
   padding-top: 30px;
-  overflow: scroll;
 }
 
 @media only screen and (max-width: 900px) {
