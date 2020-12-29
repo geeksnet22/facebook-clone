@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { useState, useEffect, forwardRef, useRef } from 'react'
 import { Avatar } from '@material-ui/core'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import './Post.css'
@@ -10,35 +10,117 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
 import { db } from '../Firebase';
 import firebase from 'firebase'
+import CommentItem from './CommentItem'
+import FlipMove from 'react-flip-move'
 
-const Post = forwardRef(({docId, name, message, photoURL, likes, comments, shares}, ref) => {
+const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
 
-    const user = useSelector(selectUser)
+    const currentUser = useSelector(selectUser)
+    const [commentInput, setCommentInput] = useState("")
+    const [likes, setLikes] = useState([])
+    const [comments, setComments] = useState([])
+    const [numOfLikes, setNumOfLikes] = useState(0)
+    const [numOfComments, setNumOfComments] = useState(0)
+    const [numOfShares, setNumOfShares] = useState(0)
+
+    // references to DOM elements
+    const commentsRef = useRef()
+    const commentInputContainerRef = useRef()
+    const commentInputRef = useRef()
+
+    useEffect(() => {
+        const likesRef = db.collection("likes").orderBy("timestamp", "desc")
+        const likesQuery = likesRef.where("postId", "==", postId)
+        likesQuery.onSnapshot((snapshot) => {
+            setLikes(snapshot.docs.map((doc) => (
+                {
+                    id: doc.id,
+                    data: doc.data()
+                }
+            )))
+            var numLikes = 0
+            snapshot.docs.map((doc) => {
+                if ( doc.data().postId === postId ) {
+                    numLikes++
+                }
+            })
+            setNumOfLikes(numLikes)
+        })
+
+        const commentsRef = db.collection("comments").orderBy("timestamp", "desc")
+        const commentsQuery = commentsRef.where("postId", "==", postId)
+        commentsQuery.onSnapshot((snapshot) => {
+            setComments(snapshot.docs.map((doc) => (
+                {
+                    id: doc.id,
+                    data: doc.data()
+                }
+            )))
+            var numComments = 0
+            snapshot.docs.map((doc) => {
+                if ( doc.data().postId === postId ) {
+                    numComments++
+                }
+            })
+            setNumOfComments(numComments)
+        })
+    }, [])
 
     const processLike = () => {
-        // get document reference
-        var postRef = db.collection("posts").doc(docId)
-        // if the post is currently liked by the user
-        if ( !likes.includes(user.email) ) {
-            postRef.update({
-                likes: firebase.firestore.FieldValue.arrayUnion(user.email)
-            });
+        var isAlreadyLiked = false
+        // check if the user has already liked this post
+        likes.map(({data: { user }}) => {
+            if ( user.email === currentUser.email ) {
+                isAlreadyLiked = true
+            }
+        })
+        const likesRef = db.collection("likes")
+        // mark the post as liked if not already liked
+        if ( !isAlreadyLiked ) {
+            likesRef.add({
+                postId: postId,
+                user: currentUser,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
         }
+        // mark the post as unliked
         else {
-            postRef.update({
-                likes: firebase.firestore.FieldValue.arrayRemove(user.email)
-            });
+            const likesQuery = likesRef.where("postId", "==", postId)
+                                .where("user.email", "==", currentUser.email)
+            likesQuery.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => doc.ref.delete())
+            }).catch((error) => console.log(error))
         }
     }
 
-    const processComment = () => {
-
+    const processComment = (e) => {
+        e.preventDefault()
+        db.collection("comments").add({
+            postId: postId,
+            content: commentInput,
+            user: currentUser,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(error => alert(error))
+        // ensure comments section is visible
+        commentsRef.current.style.display = "block"
+        commentInputContainerRef.current.style.paddingTop = "5px"
     }
 
     const processShare = () => {
 
     }
-    
+
+    const toggleCommentsDisplay = () => {
+        if ( commentsRef.current.style.display!== "none" ) {
+            commentsRef.current.style.display = "none"
+            commentInputContainerRef.current.style.paddingTop = "10px"
+        }
+        else {
+            commentsRef.current.style.display = "block"
+            commentInputContainerRef.current.style.paddingTop = "5px"
+        }
+    }
+
     return (
         <div ref={ref} className="post">
             <div className="post__header">
@@ -51,18 +133,40 @@ const Post = forwardRef(({docId, name, message, photoURL, likes, comments, share
             <div className="post__reactions">
                 <div className="likes__container">
                     <ThumbUpIcon fontSize="inherit"/>
-                    <p>{likes.length} likes</p>
+                    <p>{numOfLikes} likes</p>
                 </div>
                 <div className="comments__shares__container">
-                    <p>{comments.length} comments</p>
-                    <p>{shares.length} shares</p>
+                    <p onClick={toggleCommentsDisplay}>{comments?.length} comments</p>
+                    <p>0 shares</p>
                 </div>
             </div>
             <div className="post__buttons__container">
                 <ReactionOption Icon={ThumbUpAltOutlinedIcon} text="Like" onClick={processLike} 
-                    isLiked={likes.includes(user.email)}/>
-                <ReactionOption Icon={ChatOutlinedIcon} text="Comment" onClick={processComment} />
-                <ReactionOption Icon={SharedOutlinedIcon} text="Share" onClick={processShare} />
+                    isLiked={likes.includes(currentUser.email)}/>
+                <ReactionOption Icon={ChatOutlinedIcon} text="Comment" 
+                    onClick={() => {commentInputRef.current.focus()}} />
+                <ReactionOption Icon={SharedOutlinedIcon} text="Share" 
+                    onClick={() => {}} />
+            </div>
+            <div className="comments__container" style={{display: "none"}} ref={commentsRef}>
+                <FlipMove>
+                    {comments.map(({id, data: {user, content}}) => (
+                        <CommentItem key={id} 
+                                    imgSrc={user.photoURL} 
+                                    userName={user.displayName} 
+                                    content={content} />
+                    ))}
+                </FlipMove>
+            </div>
+            <div ref={commentInputContainerRef} style={{paddingTop: "10px"}} className="comment__input__container">
+                <Avatar src={photoURL} style={{height: "30px", width: "30px"}} />
+                <div className="comment__input">
+                    <form>
+                        <input ref={commentInputRef} value={commentInput} type="text" onChange={(e) => setCommentInput(e.target.value)}
+                            placeholder="Write a comment..." />
+                        <button onClick={processComment} type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     )
