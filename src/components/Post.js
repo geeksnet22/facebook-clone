@@ -30,7 +30,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     const commentInputRef = useRef()
 
     useEffect(() => {
-        const likesRef = db.collection("likes").orderBy("timestamp", "desc")
+        const likesRef = db.collection(`posts/${postId}/likes`).orderBy("timestamp", "desc")
         const likesQuery = likesRef.where("postId", "==", postId)
         likesQuery.onSnapshot((snapshot) => {
             setLikes(snapshot.docs.map((doc) => (
@@ -51,7 +51,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             setNumOfLikes(numLikes)
         })
 
-        const commentsRef = db.collection("comments").orderBy("timestamp", "desc")
+        const commentsRef = db.collection(`posts/${postId}/comments`).orderBy("timestamp", "desc")
         const commentsQuery = commentsRef.where("postId", "==", postId)
         commentsQuery.onSnapshot((snapshot) => {
             setComments(snapshot.docs.map((doc) => (
@@ -78,7 +78,8 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
                 isAlreadyLiked = true
             }
         })
-        const likesRef = db.collection("likes")
+        // const likesRef = db.collection("likes")
+        const likesRef = db.collection(`posts/${postId}/likes`)
         // mark the post as liked if not already liked
         if ( !isAlreadyLiked ) {
             likesRef.add({
@@ -99,7 +100,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
 
     const processComment = (e) => {
         e.preventDefault()
-        db.collection("comments").add({
+        db.collection(`posts/${postId}/comments`).add({
             postId: postId,
             content: commentInput,
             user: currentUser,
