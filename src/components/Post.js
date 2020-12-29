@@ -22,6 +22,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     const [numOfLikes, setNumOfLikes] = useState(0)
     const [numOfComments, setNumOfComments] = useState(0)
     const [numOfShares, setNumOfShares] = useState(0)
+    const [isLiked, setIsLiked] = useState(false)
 
     // references to DOM elements
     const commentsRef = useRef()
@@ -42,6 +43,9 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             snapshot.docs.map((doc) => {
                 if ( doc.data().postId === postId ) {
                     numLikes++
+                    if ( doc.data().user.email === currentUser.email ) {
+                        setIsLiked(true)
+                    }
                 }
             })
             setNumOfLikes(numLikes)
@@ -111,6 +115,9 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     }
 
     const toggleCommentsDisplay = () => {
+        if ( numOfComments == 0 ) {
+            return
+        }
         if ( commentsRef.current.style.display!== "none" ) {
             commentsRef.current.style.display = "none"
             commentInputContainerRef.current.style.paddingTop = "10px"
@@ -142,7 +149,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             </div>
             <div className="post__buttons__container">
                 <ReactionOption Icon={ThumbUpAltOutlinedIcon} text="Like" onClick={processLike} 
-                    isLiked={likes.includes(currentUser.email)}/>
+                    isLiked={isLiked}/>
                 <ReactionOption Icon={ChatOutlinedIcon} text="Comment" 
                     onClick={() => {commentInputRef.current.focus()}} />
                 <ReactionOption Icon={SharedOutlinedIcon} text="Share" 
