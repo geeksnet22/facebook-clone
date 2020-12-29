@@ -167,7 +167,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             </div>
             <div ref={commentInputContainerRef} style={{paddingTop: "10px"}} 
             className="comment__input__container">
-                <Avatar src={photoURL} style={{height: "30px", width: "30px"}} />
+                <Avatar src={currentUser.photoURL} style={{height: "30px", width: "30px"}} />
                 <div className="comment__input">
                     <form>
                         <input ref={commentInputRef} value={commentInput} type="text" 
