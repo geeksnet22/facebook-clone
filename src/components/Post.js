@@ -71,16 +71,9 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     }, [])
 
     const processLike = () => {
-        var isAlreadyLiked = false
-        // check if the user has already liked this post
-        likes.map(({data: { user }}) => {
-            if ( user.email === currentUser.email ) {
-                isAlreadyLiked = true
-            }
-        })
         const likesRef = db.collection(`posts/${postId}/likes`)
         // mark the post as liked if not already liked
-        if ( !isAlreadyLiked ) {
+        if ( !isLiked ) {
             likesRef.add({
                 postId: postId,
                 user: currentUser,
@@ -95,6 +88,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
                 querySnapshot.forEach((doc) => doc.ref.delete())
             }).catch((error) => console.log(error))
         }
+        setIsLiked(!isLiked)
     }
 
     const processComment = (e) => {
