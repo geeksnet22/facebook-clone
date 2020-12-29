@@ -21,6 +21,7 @@
     display: flex;
     flex: 0.2;
     align-items: center;
+    padding: 5px;
 }
 
 .search__field {
@@ -70,6 +71,7 @@
     display: flex;
     flex: 0.2;
     align-items: flex-end;
+    padding-right: 5px;
 }
 
 .user_identity {
@@ -86,7 +88,6 @@
 .header__right__icons {
     display: flex;
     justify-content: space-evenly;
-    padding-right: 10px;
 }
 
 .header__right__icons > * {

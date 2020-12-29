@@ -1,0 +1,13 @@
+.commentItem {
+    display: flex;
+    color: #ffffff;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.content__container {
+    margin-left: 5px;
+    padding: 10px;
+    background-color: var(--searchBackground);
+    border-radius: 20px;
+}

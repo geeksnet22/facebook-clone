@@ -21,7 +21,7 @@ function Feed() {
                     data: doc.data(),
                 }
             )))
-        ));
+        ))
     }, []);
 
     const sendPost = (e) => {
@@ -30,33 +30,29 @@ function Feed() {
             name: user.displayName,
             message: input,
             photoURL: user.photoURL || '',
-            likes: [],
-            comments: [],
-            shares: [],
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(error => alert(error))
     }
+
     return (
         <div className="feed">
             <div className="feed__input__container">
                 <Avatar src={user.photoURL} />
                 <div className="feed__input">
                     <form>
-                        <input value={input} type="text" onChange={(e) => setInput(e.target.value)} placeholder={`What's on your mind, ${user.displayName?.split(' ')[0] || 'user'}?`} />
+                        <input value={input} type="text" onChange={(e) => setInput(e.target.value)} 
+                            placeholder={`What's on your mind, ${user.displayName?.split(' ')[0] || 'user'}?`} />
                         <button onClick={sendPost} type="submit">Submit</button>
                     </form>
                 </div>
             </div>
             <FlipMove>
-                {posts.map(({id, data: {name, message, photoURL, likes, comments, shares}}) => (
+                {posts.map(({id, data: {name, message, photoURL}}) => (
                     <Post key={id}
-                        docId={id}
+                        postId={id}
                         name={name}
                         message={message}
-                        photoURL={photoURL} 
-                        likes={likes}
-                        comments={comments}
-                        shares={shares}
+                        photoURL={photoURL}
                     />
                 ))}
             </FlipMove>

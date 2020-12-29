@@ -14,10 +14,6 @@
     flex: 1;
 }
 
-.feed__input__container > .feed__input > form > input {
-    flex: 1;
-}
-
 .feed__input {
     flex: 1;
     margin-left: 10px;
@@ -29,6 +25,7 @@
 }
 
 .feed__input > form > input {
+    flex: 1;
     border: none;
     outline: none;
     color: #ffffff;

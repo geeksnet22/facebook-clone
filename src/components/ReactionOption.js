@@ -7,8 +7,8 @@ function ReactionOption({ Icon, text, onClick, isLiked }) {
     const classes = `reactionOption ${likedString}`
     return (
         <div className={classes} onClick={onClick}>
-            { isLiked && <ThumbUpAltIcon /> }
-            { !isLiked && <Icon /> }
+            { isLiked && <ThumbUpAltIcon fontSize="small"/> }
+            { !isLiked && <Icon fontSize="small"/> }
             <p>{text}</p>
         </div>
     )
