@@ -158,11 +158,13 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
                     ))}
                 </FlipMove>
             </div>
-            <div ref={commentInputContainerRef} style={{paddingTop: "10px"}} className="comment__input__container">
+            <div ref={commentInputContainerRef} style={{paddingTop: "10px"}} 
+            className="comment__input__container">
                 <Avatar src={photoURL} style={{height: "30px", width: "30px"}} />
                 <div className="comment__input">
                     <form>
-                        <input ref={commentInputRef} value={commentInput} type="text" onChange={(e) => setCommentInput(e.target.value)}
+                        <input ref={commentInputRef} value={commentInput} type="text" 
+                        onChange={(e) => setCommentInput(e.target.value)}
                             placeholder="Write a comment..." />
                         <button onClick={processComment} type="submit">Submit</button>
                     </form>
