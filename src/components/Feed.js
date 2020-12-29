@@ -26,6 +26,7 @@ function Feed() {
 
     const sendPost = (e) => {
         e.preventDefault()
+        setInput("")
         db.collection("posts").add({
             name: user.displayName,
             message: input,

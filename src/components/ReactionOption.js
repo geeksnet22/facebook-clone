@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './ReactionOption.css'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 function ReactionOption({ Icon, text, onClick, isLiked }) {
+
     const likedString = isLiked ? "liked" : ""
     const classes = `reactionOption ${likedString}`
     return (

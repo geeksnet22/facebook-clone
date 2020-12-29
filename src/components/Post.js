@@ -33,7 +33,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
         const likesRef = db.collection(`posts/${postId}/likes`).orderBy("timestamp", "desc")
         const likesQuery = likesRef.where("postId", "==", postId)
         likesQuery.onSnapshot((snapshot) => {
-            setLikes(snapshot.docs.map((doc) => (
+            setLikes(snapshot.docs.reverse().map((doc) => (
                 {
                     id: doc.id,
                     data: doc.data()
@@ -54,7 +54,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
         const commentsRef = db.collection(`posts/${postId}/comments`).orderBy("timestamp", "desc")
         const commentsQuery = commentsRef.where("postId", "==", postId)
         commentsQuery.onSnapshot((snapshot) => {
-            setComments(snapshot.docs.map((doc) => (
+            setComments(snapshot.docs.reverse().map((doc) => (
                 {
                     id: doc.id,
                     data: doc.data()
@@ -78,7 +78,6 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
                 isAlreadyLiked = true
             }
         })
-        // const likesRef = db.collection("likes")
         const likesRef = db.collection(`posts/${postId}/likes`)
         // mark the post as liked if not already liked
         if ( !isAlreadyLiked ) {
@@ -106,6 +105,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             user: currentUser,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(error => alert(error))
+        setCommentInput("")
         // ensure comments section is visible
         commentsRef.current.style.display = "block"
         commentInputContainerRef.current.style.paddingTop = "5px"
