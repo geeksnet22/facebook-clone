@@ -1,21 +1,23 @@
 import React from 'react'
 import { Avatar } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import './LikesPopout.css'
+import './LikesPopoutItem.css'
 
-function LikesPopout({user}) {
+function LikesPopoutItem({ imgSrc, name }) {
     return (
         <div className="likesPopout">
             <div className="comment__item__container">
-                <Avatar />
-                <h4>name</h4>
+                <div className="user__info__container">
+                    <Avatar src={imgSrc} name={name}/>
+                    <p>{name}</p>
+                </div>
                 <div className="add__friend__container">
                     <PersonAddIcon />
-                    <h4>Add Friend</h4>
+                    <p>Add Friend</p>
                 </div>
             </div>
         </div>
     )
 }
 
-export default LikesPopout
+export default LikesPopoutItem

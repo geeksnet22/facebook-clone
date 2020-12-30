@@ -12,6 +12,8 @@ import { db } from '../Firebase';
 import firebase from 'firebase'
 import CommentItem from './CommentItem'
 import FlipMove from 'react-flip-move'
+import { useDispatch } from 'react-redux'
+import { displayLikes } from '../features/likesSlice'
 
 const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
 
@@ -19,10 +21,9 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     const [commentInput, setCommentInput] = useState("")
     const [likes, setLikes] = useState([])
     const [comments, setComments] = useState([])
-    const [numOfLikes, setNumOfLikes] = useState(0)
-    const [numOfComments, setNumOfComments] = useState(0)
     const [numOfShares, setNumOfShares] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
+    const dispatch = useDispatch()
 
     // references to DOM elements
     const commentsRef = useRef()
@@ -31,42 +32,28 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
 
     useEffect(() => {
         const likesRef = db.collection(`posts/${postId}/likes`).orderBy("timestamp", "desc")
-        const likesQuery = likesRef.where("postId", "==", postId)
-        likesQuery.onSnapshot((snapshot) => {
+        likesRef.onSnapshot((snapshot) => {
             setLikes(snapshot.docs.reverse().map((doc) => (
                 {
                     id: doc.id,
                     data: doc.data()
                 }
             )))
-            var numLikes = 0
             snapshot.docs.map((doc) => {
-                if ( doc.data().postId === postId ) {
-                    numLikes++
-                    if ( doc.data().user.email === currentUser.email ) {
-                        setIsLiked(true)
-                    }
+                if ( doc.data().user.email === currentUser.email ) {
+                    setIsLiked(true)
                 }
             })
-            setNumOfLikes(numLikes)
         })
 
         const commentsRef = db.collection(`posts/${postId}/comments`).orderBy("timestamp", "desc")
-        const commentsQuery = commentsRef.where("postId", "==", postId)
-        commentsQuery.onSnapshot((snapshot) => {
+        commentsRef.onSnapshot((snapshot) => {
             setComments(snapshot.docs.reverse().map((doc) => (
                 {
                     id: doc.id,
                     data: doc.data()
                 }
             )))
-            var numComments = 0
-            snapshot.docs.map((doc) => {
-                if ( doc.data().postId === postId ) {
-                    numComments++
-                }
-            })
-            setNumOfComments(numComments)
         })
     }, [])
 
@@ -75,15 +62,13 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
         // mark the post as liked if not already liked
         if ( !isLiked ) {
             likesRef.add({
-                postId: postId,
                 user: currentUser,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             })
         }
         // mark the post as unliked
         else {
-            const likesQuery = likesRef.where("postId", "==", postId)
-                                .where("user.email", "==", currentUser.email)
+            const likesQuery = likesRef.where("user.email", "==", currentUser.email)
             likesQuery.get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => doc.ref.delete())
             }).catch((error) => console.log(error))
@@ -94,7 +79,6 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     const processComment = (e) => {
         e.preventDefault()
         db.collection(`posts/${postId}/comments`).add({
-            postId: postId,
             content: commentInput,
             user: currentUser,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -110,7 +94,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     }
 
     const toggleCommentsDisplay = () => {
-        if ( numOfComments == 0 ) {
+        if ( comments.length === 0 ) {
             return
         }
         if ( commentsRef.current.style.display!== "none" ) {
@@ -135,10 +119,18 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             <div className="post__reactions">
                 <div className="likes__container">
                     <ThumbUpIcon fontSize="inherit"/>
-                    <p>{numOfLikes} likes</p>
+                    <p onClick={() => dispatch(displayLikes((
+                        likes.map(({id, data: {user}}) => (
+                            {
+                                id: id,
+                                displayName: user.displayName,
+                                photoURL: user.photoURL
+                            }
+                        ))
+                    )))}>{likes.length} likes</p>
                 </div>
                 <div className="comments__shares__container">
-                    <p onClick={toggleCommentsDisplay}>{comments?.length} comments</p>
+                    <p onClick={toggleCommentsDisplay}>{comments.length} comments</p>
                     <p>0 shares</p>
                 </div>
             </div>

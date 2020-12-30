@@ -1,0 +1,44 @@
+.likesPopout {
+    display: flex;
+    color: #ffffff;
+    max-width: 700px;
+}
+
+.comment__item__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.user__info__container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0
+}
+
+.user__info__container > p {
+    margin-left: 10px;
+}
+
+.user__info__container > p:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.add__friend__container {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--searchBackground);
+    border-radius: 5px;
+}
+
+.add__friend__container:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+.add__friend__container > p {
+    margin-left: 10px;
+}
