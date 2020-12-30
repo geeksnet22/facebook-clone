@@ -1,0 +1,23 @@
+.dropdownItem {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.dropdownItem:hover {
+    background-color: var(--headerBackground);
+    cursor: pointer;
+}
+
+.left__portion {
+    display: flex;
+    align-items: center;
+}
+
+.left__portion > .text__portion {
+    margin-left: 10px;
+}

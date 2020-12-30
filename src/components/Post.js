@@ -31,8 +31,8 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     const commentInputRef = useRef()
 
     useEffect(() => {
-        const likesRef = db.collection(`posts/${postId}/likes`).orderBy("timestamp", "desc")
-        likesRef.onSnapshot((snapshot) => {
+        const likesDataRef = db.collection(`posts/${postId}/likes`).orderBy("timestamp", "desc")
+        likesDataRef.onSnapshot((snapshot) => {
             setLikes(snapshot.docs.reverse().map((doc) => (
                 {
                     id: doc.id,
@@ -46,8 +46,8 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
             })
         })
 
-        const commentsRef = db.collection(`posts/${postId}/comments`).orderBy("timestamp", "desc")
-        commentsRef.onSnapshot((snapshot) => {
+        const commentsDataRef = db.collection(`posts/${postId}/comments`).orderBy("timestamp", "desc")
+        commentsDataRef.onSnapshot((snapshot) => {
             setComments(snapshot.docs.reverse().map((doc) => (
                 {
                     id: doc.id,

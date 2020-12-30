@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
@@ -12,6 +12,7 @@ import LikesPopoutItem from './components/LikesPopoutItem'
 import { hideLikes, selectLikes } from './features/likesSlice'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import CloseIcon from '@material-ui/icons/Close'
+import Dropdown from './components/Dropdown'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   const likesPopoutContainerRef = useRef()
   const bodyRef = useRef()
   const postLikes = useSelector(selectLikes)
+  const dropdownRef = useRef()
 
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
@@ -39,6 +41,9 @@ function App() {
         //user is not logged in
         dispatch(logout())
       }
+      if ( dropdownRef.current ) {
+        dropdownRef.current.style.display = "none"
+      }
     })
   }, [])
 
@@ -51,12 +56,28 @@ function App() {
     dispatch(hideLikes)
   }
 
+  const toggleDropdown = () => {
+    if ( dropdownRef.current.style.display === "block" ) {
+      dropdownRef.current.style.display = "none"
+    }
+    else {
+      dropdownRef.current.style.display = "block"
+    }
+  }
+
   return (
     <div className="app">
       {!user ? (
         <Login />
       ) : (
         <>
+          <Header toggleDropdown={toggleDropdown} />
+          <div ref={bodyRef} className="body">
+            <Sidebar />
+            <Feed />
+            <Contacts />
+          </div>
+          <Dropdown ref={dropdownRef}/>
           <div ref={likesPopoutContainerRef} className="likes__popout__container">
             <div className="likes__popout__header">
               <div className="likes__container">
@@ -73,12 +94,6 @@ function App() {
                 <LikesPopoutItem key={id} imgSrc={photoURL} name={displayName} />
               ))}
             </div>
-          </div>
-          <Header />
-          <div ref={bodyRef} className="body">
-            <Sidebar />
-            <Feed />
-            <Contacts />
           </div>
         </>
       )}

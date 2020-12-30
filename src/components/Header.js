@@ -16,7 +16,7 @@ import { auth } from '../Firebase'
 import { selectUser } from '../features/userSlice'
 import HeaderIcons from './HeaderIcons';
 
-function Header() {
+function Header({ toggleDropdown }) {
 
     const user = useSelector(selectUser)
     const [searchText, setSearchText] = useState("")
@@ -24,11 +24,6 @@ function Header() {
 
     const processSearch = e => {
         e.preventDefault()
-    }
-
-    const signout = () => {
-        dispatch(logout())
-        auth.signOut()
     }
 
     return (
@@ -58,7 +53,7 @@ function Header() {
                     <AddRoundedIcon />
                     <ChatBubbleRoundedIcon />
                     <NotificationsIcon />
-                    <ArrowDropDownRoundedIcon onClick={signout}/>
+                    <ArrowDropDownRoundedIcon onClick={toggleDropdown}/>
                 </div>
             </div>
         </div>

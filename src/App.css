@@ -33,7 +33,7 @@
   z-index: 200;
   display: none;
   color: #ffffff;
-  border: 1px solid white;
+  box-shadow: 1px 1px #ffffff;
 }
 
 .likes__popout__header {
