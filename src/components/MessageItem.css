@@ -1,0 +1,15 @@
+.messageItem {
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.messageItem:hover {
+    background-color: var(--headerBackground);
+    cursor: pointer;
+}
+
+.name__and__last__message__container {
+    margin-left: 10px;
+}

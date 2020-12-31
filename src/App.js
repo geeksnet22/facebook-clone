@@ -13,6 +13,8 @@ import { hideLikes, selectLikes } from './features/likesSlice'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import CloseIcon from '@material-ui/icons/Close'
 import Dropdown from './components/Dropdown'
+import Messages from './components/Messages'
+import NewMessageCreator from './components/NewMessageCreator'
 
 function App() {
 
@@ -78,6 +80,8 @@ function App() {
             <Contacts />
           </div>
           <Dropdown ref={dropdownRef}/>
+          <NewMessageCreator />
+          <Messages />
           <div ref={likesPopoutContainerRef} className="likes__popout__container">
             <div className="likes__popout__header">
               <div className="likes__container">

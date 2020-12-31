@@ -10,9 +10,7 @@ import ChatBubbleRoundedIcon from '@material-ui/icons/ChatBubbleRounded'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import ArrowDropDownRoundedIcon from '@material-ui/icons/ArrowDropDownRounded'
 import './Header.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../features/userSlice'
-import { auth } from '../Firebase'
+import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
 import HeaderIcons from './HeaderIcons';
 
@@ -20,7 +18,6 @@ function Header({ toggleDropdown }) {
 
     const user = useSelector(selectUser)
     const [searchText, setSearchText] = useState("")
-    const dispatch = useDispatch()
 
     const processSearch = e => {
         e.preventDefault()

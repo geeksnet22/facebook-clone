@@ -1,0 +1,70 @@
+.newMessageCreator {
+    position: fixed;
+    bottom: 0;
+    right: 40px;
+    color: #ffffff;
+    height: 450px;
+    width: 400px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.message__creation__body {
+    background-color: var(--headerBackground);
+    flex: 1;
+}
+
+.top__portion {
+    padding: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ffffff;
+    flex: 1
+}
+
+.message__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.message__form__container {
+    display: flex;
+    margin-top: 5px;
+}
+
+.message__form__container > form {
+    display: flex;
+    flex: 1;
+}
+
+.message__form__container > form > input {
+    margin-left: 15px;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 15px;
+    background-color: var(--headerBackground);
+}
+
+.message__form__container > form > button {
+    display: none;
+}
+
+.create__message__logo {
+    display: flex;
+    border-radius: 50%;
+    background-color: var(--headerBackground);
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    align-self: flex-end;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+    .newMessageCreator {
+        width: 300px;
+    }
+}

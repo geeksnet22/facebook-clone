@@ -1,0 +1,82 @@
+.messages {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    color: #ffffff;
+    padding: 5px;
+    padding-top: 0;
+    background-color: var(--bodyBackground);
+    width: 350px;
+    border-radius: 10px;
+    height: 90%;
+    overflow: scroll;
+    display: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: inherit;
+}
+
+.header > h2 {
+    padding-left: 5px;
+}
+
+.header__icons {
+    padding-right: 5px;
+}
+
+.header__icons > * {
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 50%;
+}
+
+.header__icons > *:hover {
+    background-color: var(--headerBackground);
+    cursor: pointer;
+}
+
+.search__container {
+    display: flex;
+    padding: 5px;
+}
+
+.form__container {
+    display: flex;
+    background-color: var(--searchBackground);
+    width: 100%;
+    border-radius: 20px;
+    align-items: center;
+    padding-right: 50px;
+}
+
+.form__container > form {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+}
+
+.form__container > form > input {
+    color: #ffffff;
+    background-color: var(--searchBackground);
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 15px;
+}
+
+.form__container > form > button {
+    display: none;
+}
+
+.message__items__container {
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+    .messages {
+        width: 300px;
+    }
+  }

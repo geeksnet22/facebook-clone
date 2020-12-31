@@ -26,16 +26,13 @@ function Feed() {
 
     const sendPost = (e) => {
         e.preventDefault()
-        e.stopPropagation()
-        e.stopImmediatePropagation()
-        return true
-        // db.collection("posts").add({
-        //     name: user.displayName,
-        //     message: input,
-        //     photoURL: user.photoURL || '',
-        //     timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        // }).catch(error => alert(error))
-        // setInput("")
+        db.collection("posts").add({
+            name: user.displayName,
+            message: input,
+            photoURL: user.photoURL || '',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(error => alert(error))
+        setInput("")
     }
 
     return (
