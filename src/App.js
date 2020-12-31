@@ -90,8 +90,9 @@ function App() {
               </div>
             </div>
             <div className="likes__info__container">
-              {postLikes.map(({id, displayName, photoURL}) => (
-                <LikesPopoutItem key={id} imgSrc={photoURL} name={displayName} />
+              {postLikes.map(({id, email, displayName, photoURL}) => (
+                <LikesPopoutItem key={id} imgSrc={photoURL} name={displayName}
+                  isCurrentUser={email === user.email} />
               ))}
             </div>
           </div>

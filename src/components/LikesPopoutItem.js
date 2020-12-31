@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import './LikesPopoutItem.css'
 
-function LikesPopoutItem({ imgSrc, name }) {
+function LikesPopoutItem({ imgSrc, name, isCurrentUser }) {
     return (
         <div className="likesPopout">
             <div className="comment__item__container">
@@ -11,10 +11,10 @@ function LikesPopoutItem({ imgSrc, name }) {
                     <Avatar src={imgSrc} name={name}/>
                     <p>{name}</p>
                 </div>
-                <div className="add__friend__container">
+                {!isCurrentUser && <div className="add__friend__container">
                     <PersonAddIcon />
                     <p>Add Friend</p>
-                </div>
+                </div>}
             </div>
         </div>
     )

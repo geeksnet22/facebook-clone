@@ -123,6 +123,7 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
                         likes.map(({id, data: {user}}) => (
                             {
                                 id: id,
+                                email: user.email,
                                 displayName: user.displayName,
                                 photoURL: user.photoURL
                             }

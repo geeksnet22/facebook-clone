@@ -3,6 +3,7 @@
     align-items: center;
     margin-bottom: 10px;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .contactItem:hover {
