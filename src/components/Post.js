@@ -15,7 +15,7 @@ import FlipMove from 'react-flip-move'
 import { useDispatch } from 'react-redux'
 import { displayLikes } from '../features/likesSlice'
 
-const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
+const Post = forwardRef(({postId, message, user}, ref) => {
 
     const currentUser = useSelector(selectUser)
     const [commentInput, setCommentInput] = useState("")
@@ -110,8 +110,8 @@ const Post = forwardRef(({postId, name, message, photoURL}, ref) => {
     return (
         <div ref={ref} className="post">
             <div className="post__header">
-                <Avatar src={photoURL}/>
-                <h2>{name}</h2>
+                <Avatar src={user.photoURL}/>
+                <h2>{user.displayName}</h2>
             </div>
             <div className="post__message">
                 <p>{message}</p>

@@ -27,9 +27,8 @@ function Feed() {
     const sendPost = (e) => {
         e.preventDefault()
         db.collection("posts").add({
-            name: user.displayName,
+            user: user,
             message: input,
-            photoURL: user.photoURL || '',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(error => alert(error))
         setInput("")
@@ -48,12 +47,11 @@ function Feed() {
                 </div>
             </div>
             <FlipMove>
-                {posts.map(({id, data: {name, message, photoURL}}) => (
+                {posts.map(({id, data: {message, user}}) => (
                     <Post key={id}
                         postId={id}
-                        name={name}
                         message={message}
-                        photoURL={photoURL}
+                        user={user}
                     />
                 ))}
             </FlipMove>

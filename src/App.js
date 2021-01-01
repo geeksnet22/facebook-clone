@@ -55,7 +55,7 @@ function App() {
 
   const closeLikesPopout = () => {
     likesPopoutContainerRef.current.style.display = "none"
-    dispatch(hideLikes)
+    dispatch(hideLikes())
   }
 
   const toggleDropdown = () => {

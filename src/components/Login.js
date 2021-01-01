@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../features/userSlice'
 import { auth, db } from '../Firebase'
+import firebase from 'firebase'
 import './Login.css'
 
 function Login() {
@@ -29,7 +30,6 @@ function Login() {
         if (!name) {
             return alert("Full name is required for sign up")
         }
-        console.log(name)
         auth.createUserWithEmailAndPassword(email, password)
         .then(userAuth => { userAuth.user.updateProfile({
             displayName: name,
@@ -45,8 +45,9 @@ function Login() {
             ))
         }).then(db.collection("users").add({
             email: email,
-            name: name,
+            displayName: name,
             photoURL: photoURL,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }))
         }).catch(error => alert(error))
     }

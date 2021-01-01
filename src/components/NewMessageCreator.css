@@ -63,8 +63,13 @@
     margin-bottom: 20px;
 }
 
+.contact__suggestions {
+    display: none;
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 900px) {
-    .newMessageCreator {
+    /* .newMessageCreator {
         width: 300px;
-    }
+    } */
 }

@@ -11,6 +11,7 @@ import './Dropdown.css'
 import DropdownItem from './DropdownItem'
 import { useDispatch } from 'react-redux'
 import { logout } from '../features/userSlice'
+import { hideLikes } from '../features/likesSlice'
 import { auth } from '../Firebase'
 
 
@@ -21,6 +22,7 @@ const Dropdown = forwardRef((props, ref) => {
 
     const signout = () => {
         dispatch(logout())
+        dispatch(hideLikes())
         auth.signOut()
     }
 
