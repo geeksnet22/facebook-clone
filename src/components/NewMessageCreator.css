@@ -7,23 +7,37 @@
     width: 400px;
     border-radius: 10px;
     display: flex;
+    justify-content: flex-end;
 }
 
 .message__creation__body {
     background-color: var(--headerBackground);
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    padding: 10px;
+    display: none;
 }
 
 .top__portion {
-    padding: 10px;
     padding-bottom: 20px;
     border-bottom: 1px solid #ffffff;
-    flex: 1
 }
 
 .message__header {
     display: flex;
     justify-content: space-between;
+}
+
+.message__header > .close__icon__container {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.message__header > .close__icon__container:hover {
+    cursor: pointer;
+    background-color: gray;
 }
 
 .message__form__container {
@@ -63,13 +77,57 @@
     margin-bottom: 20px;
 }
 
+.create__message__logo:hover {
+    cursor: pointer;
+}
+
 .contact__suggestions {
     display: none;
     flex-direction: column;
 }
 
+.messages__section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    display: none;
+    overflow: scroll;
+}
+
+.messages__section > .message__input {
+    display: flex;
+    padding: 0 10px;
+}
+
+.messages__section > .message__input > form {
+    display: flex;
+    flex: 1;
+}
+
+.messages__section > .message__input > form > input {
+    flex: 1;
+    background-color: var(--searchBackground);
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    color: #ffffff;
+    padding: 5px;
+}
+
+.messages__section > .message__input > form > button {
+    display: none;
+}
+
 @media only screen and (max-width: 900px) {
-    /* .newMessageCreator {
-        width: 300px;
-    } */
+    .newMessageCreator {
+        right: 10px;
+    }
+    .create__message__logo {
+        margin-left: 10px;
+    }
+    .newMessageCreator {
+        width: 350px;
+    }
 }

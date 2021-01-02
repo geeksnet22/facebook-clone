@@ -1,0 +1,35 @@
+.messagesDisplay {
+    flex: 1;
+    overflow: scroll;
+}
+
+.messagesDisplay > #message__container {
+    display: flex;
+    flex: 1;
+    color: #ffffff;
+    margin: 5px 0;
+    z-index: 100;
+}
+
+#message__container.sent {
+    padding: 5px;
+    justify-content: flex-end;
+}
+
+#message__container.received {
+    padding: 5px;
+    justify-content: flex-start;
+}
+
+p {
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.received > p {
+    background-color: var(--searchBackground);
+}
+
+.sent > p {
+    background-color: var(--blueColor);
+}

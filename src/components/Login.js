@@ -48,8 +48,7 @@ function Login() {
             displayName: name,
             photoURL: photoURL,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }))
-        }).catch(error => alert(error))
+        }))}).catch(error => alert(error))
     }
 
     return (
