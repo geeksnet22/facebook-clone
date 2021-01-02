@@ -24,6 +24,7 @@ function NewMessageCreator() {
     const messageCreationBodyRef = useRef()
     const contactSuggestionsRef = useRef()
     const messagesSectionRef = useRef()
+    const messageCreatorRef = useRef()
 
     useEffect(() => {
         db.collection("users").onSnapshot((snapshot) => {
@@ -89,7 +90,7 @@ function NewMessageCreator() {
     }
     
     return (
-        <div className="newMessageCreator">
+        <div ref={messageCreatorRef} className="newMessageCreator">
             <div ref={messageCreationBodyRef} className="message__creation__body">
                 <div className="top__portion">
                     <div className="message__header">
@@ -102,7 +103,7 @@ function NewMessageCreator() {
                     <div className="message__form__container">
                         <p>To:</p>
                         <form>
-                            <input type="text" value={username} onChange={e => handleUsernameInput(e)}/>
+                            <input type="text" value={username} onChange={e => handleUsernameInput(e)} />
                             <button type="submit">Send Message</button>
                         </form>
                     </div>
