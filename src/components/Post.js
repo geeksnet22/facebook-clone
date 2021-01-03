@@ -118,7 +118,8 @@ const Post = forwardRef(({postId, message, user}, ref) => {
             </div>
             <div className="post__reactions">
                 <div className="likes__container">
-                    <ThumbUpIcon fontSize="inherit"/>
+                    <ThumbUpIcon fontSize="inherit" style={{backgroundColor: "#4267B2", padding: "4px",
+                                                                borderRadius: "50%"}}/>
                     <p onClick={() => dispatch(displayLikes((
                         likes.map(({id, data: {user}}) => (
                             {
