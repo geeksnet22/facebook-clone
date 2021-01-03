@@ -8,7 +8,7 @@ function LikesPopoutItem({ imgSrc, displayName, isCurrentUser }) {
         <div className="likesPopout">
             <div className="comment__item__container">
                 <div className="user__info__container">
-                    <Avatar src={imgSrc} name={displayName}/>
+                    <Avatar src={imgSrc} />
                     <p>{displayName}</p>
                 </div>
                 {!isCurrentUser && <div className="add__friend__container">

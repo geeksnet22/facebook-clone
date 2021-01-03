@@ -19,9 +19,7 @@ import NewMessageCreator from './components/NewMessageCreator'
 function App() {
 
   const currentUser = useSelector(selectUser)
-
   const [currentUserId, setCurrentUserId] = useState("")
-  const [messagedUsers, setMessagedUsers] = useState([])
 
   const dispatch = useDispatch()
   const likesPopoutContainerRef = useRef()
@@ -114,7 +112,7 @@ function App() {
             </div>
             <div className="likes__info__container">
               {postLikes.map(({id, email, displayName, photoURL}) => (
-                <LikesPopoutItem key={id} imgSrc={photoURL} name={displayName}
+                <LikesPopoutItem key={id} imgSrc={photoURL} displayName={displayName}
                   isCurrentUser={email === currentUser.email} />
               ))}
             </div>
