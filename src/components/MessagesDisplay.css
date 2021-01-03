@@ -8,7 +8,6 @@
     flex: 1;
     color: #ffffff;
     margin: 5px 0;
-    z-index: 100;
 }
 
 #message__container.sent {
@@ -21,9 +20,11 @@
     justify-content: flex-start;
 }
 
-p {
+#message__container > p {
+    text-align: center;
     padding: 5px;
     border-radius: 10px;
+    max-width: 200px;
 }
 
 .received > p {

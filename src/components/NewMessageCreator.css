@@ -3,8 +3,8 @@
     bottom: 0;
     right: 40px;
     color: #ffffff;
-    height: 450px;
-    width: 400px;
+    height: fit-content;
+    width: fit-content;
     border-radius: 10px;
     display: flex;
     justify-content: flex-end;
@@ -12,7 +12,7 @@
 
 .message__creation__body {
     background-color: var(--headerBackground);
-    display: flex;
+    display: none;
     flex: 1;
     flex-direction: column;
     padding: 10px;
@@ -126,12 +126,5 @@
     }
     .create__message__logo {
         margin-left: 10px;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .newMessageCreator {
-        width: 350px;
-        height: 300px;
     }
 }

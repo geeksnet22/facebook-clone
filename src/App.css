@@ -30,7 +30,6 @@
   padding: 15px;
   background-color: var(--bodyBackground);
   border-radius: 10px;
-  z-index: 200;
   display: none;
   color: #ffffff;
   box-shadow: 1px 1px #ffffff;

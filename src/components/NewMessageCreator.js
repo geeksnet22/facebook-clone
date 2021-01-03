@@ -104,7 +104,11 @@ function NewMessageCreator() {
                     <div className="message__header">
                         <p>New Message</p>
                         <div className="close__icon__container" 
-                            onClick={() => {messageCreationBodyRef.current.style.display = "none"}}>
+                            onClick={() => {
+                                            messageCreationBodyRef.current.style.display = "none"
+                                            messageCreatorRef.current.style.width = "fit-content"
+                                            messageCreatorRef.current.style.height = "fit-content"
+                                            }}>
                             <CloseIcon fontSize="default" style={{color: "#4267B2"}}/>
                         </div>
                     </div>
@@ -128,17 +132,29 @@ function NewMessageCreator() {
                     ))}
                 </div>
                 <div ref={messagesSectionRef} className="messages__section">
-                    {selectedUsers.length > 0 && <MessagesDisplay currentUserId={currentUserId} otherUserId={selectedUsers[0].uid} />}
+                    {selectedUsers.length > 0 && <MessagesDisplay currentUserId={currentUserId} 
+                        otherUserId={selectedUsers[0].uid} />}
                     <div className="message__input">
                         <form>
-                            <input value={messageContent} placeholder="Type message here..." onChange={e => setMessageContent(e.target.value)} type="text"/>
+                            <input value={messageContent} placeholder="Type message here..." 
+                                onChange={e => setMessageContent(e.target.value)} type="text"/>
                             <button onClick={sendMessage} type="submit">Send Message</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div className="create__message__logo" 
-                onClick={() => {messageCreationBodyRef.current.style.display = "flex"}} >
+                onClick={() => {
+                                messageCreationBodyRef.current.style.display = "flex"
+                                if ( window.innerWidth < 500 ) {
+                                    messageCreatorRef.current.style.width = "350px"
+                                    messageCreatorRef.current.style.height = "300px"
+                                }
+                                else {
+                                    messageCreatorRef.current.style.width = "400px"
+                                    messageCreatorRef.current.style.height = "450px"
+                                }
+                                }} >
                 <CreateIcon />
             </div>
         </div>
