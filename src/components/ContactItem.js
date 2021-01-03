@@ -2,17 +2,17 @@ import React from 'react'
 import { Avatar } from '@material-ui/core'
 import './ContactItem.css'
 
-function ContactItem({ uid, photoURL, name, email, processUserSelection }) {
+function ContactItem({ uid, photoURL, displayName, email, processUserSelection }) {
     return (
         <div className="contactItem" 
-            onClick={() => processUserSelection({
+            onClick={() => processUserSelection ? processUserSelection({
                     uid: uid,
-                    name: name, 
+                    displayName: displayName, 
                     email: email, 
                     photoURL: photoURL
-                })}>
+                }) : {} }>
             <Avatar src={photoURL}/>
-            <h4>{name}</h4>
+            <h4>{displayName}</h4>
         </div>
     )
 }

@@ -22,9 +22,9 @@ function Contacts() {
     return (
         <div className="contacts">
             <h2>Contacts</h2>
-            {contacts.map(({id, data: {name, email, photoURL}}) => (
+            {contacts.map(({id, data: {displayName, email, photoURL}}) => (
                 email !== user.email && <ContactItem key={id}
-                            name={name}
+                            displayName={displayName}
                             photoURL={photoURL}/>
             ))}
         </div>

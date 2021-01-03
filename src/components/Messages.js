@@ -12,7 +12,8 @@ const Messages = forwardRef(({currentUserId}, ref) => {
     const [messagedUserIds, setMessagedUserIds] = useState([])
 
     useEffect(() => {
-        db.collection(`users/${currentUserId}/chats`).onSnapshot((userSnapshot) => {
+        db.collection(`users/${currentUserId}/chats`)
+        .orderBy("timestamp", "desc").onSnapshot((userSnapshot) => {
             setMessagedUserIds(userSnapshot.docs.map(doc => (
               {
                 userId: doc.id
@@ -41,8 +42,9 @@ const Messages = forwardRef(({currentUserId}, ref) => {
                 </div>
             </div>
 
-            {currentUserId && messagedUserIds.map(userId => (
-                <MessageItem key={userId.userId} userId={userId} currentUserId={currentUserId} />
+            {currentUserId && messagedUserIds.map(messagedUserId => (
+                <MessageItem key={messagedUserId.userId} messagedUserId={messagedUserId} 
+                    currentUserId={currentUserId} />
             ))}
         </div>
     )

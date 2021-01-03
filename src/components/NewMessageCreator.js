@@ -43,7 +43,7 @@ function NewMessageCreator() {
     const processUserSelection = (userInfo) => {
         contactSuggestionsRef.current.style.display = "none"
         messagesSectionRef.current.style.display = "flex"
-        setUsername(userInfo.name)
+        setUsername(userInfo.displayName)
         selectedUsers.push(userInfo)
         setSelectedUsers(selectedUsers)
         // fetch messages messages for this users combination
@@ -76,7 +76,7 @@ function NewMessageCreator() {
                     type: "received",
                     message: messageContent,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    user: userInfo
+                    user: user
                 }
             )
         })
@@ -122,7 +122,7 @@ function NewMessageCreator() {
                             key={id}
                             uid={id}
                             photoURL={photoURL}
-                            name={displayName}
+                            displayName={displayName}
                             email={email}
                             processUserSelection={processUserSelection}/>
                     ))}
