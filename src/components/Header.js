@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
 import HeaderIcons from './HeaderIcons';
 
-function Header({ toggleDropdown }) {
+function Header({ toggleDropdown, toggleMessagesMenu }) {
 
     const user = useSelector(selectUser)
     const [searchText, setSearchText] = useState("")
@@ -48,7 +48,7 @@ function Header({ toggleDropdown }) {
                 </div>
                 <div className="header__right__icons">
                     <AddRoundedIcon />
-                    <ChatBubbleRoundedIcon />
+                    <ChatBubbleRoundedIcon onClick={toggleMessagesMenu}/>
                     <NotificationsIcon />
                     <ArrowDropDownRoundedIcon onClick={toggleDropdown}/>
                 </div>

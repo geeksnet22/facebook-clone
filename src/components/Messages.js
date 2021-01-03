@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect, forwardRef } from 'react'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import FullscreenIcon from '@material-ui/icons/Fullscreen'
 import CreateIcon from '@material-ui/icons/Create'
 import SearchIcon from '@material-ui/icons/Search'
 import MessageItem from './MessageItem'
 import './Messages.css'
+import { db } from '../Firebase'
 
-function Messages() {
+const Messages = forwardRef(({currentUserId}, ref) => {
+    
+    const [messagedUserIds, setMessagedUserIds] = useState([])
+
+    useEffect(() => {
+        db.collection(`users/${currentUserId}/chats`).onSnapshot((userSnapshot) => {
+            setMessagedUserIds(userSnapshot.docs.map(doc => (
+              {
+                userId: doc.id
+              }
+            )))
+          })
+    }, [])
+
     return (
-        <div className="messages">
+        <div ref={ref} className="messages">
             <div className="header">
                 <h2>Messenger</h2>
                 <div className="header__icons">
@@ -26,24 +40,12 @@ function Messages() {
                     </form>
                 </div>
             </div>
-            <div className="message__items__container">
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-                <MessageItem imgSrc="" name="Gurinder Bhangu" lastMessage="hey man" />
-            </div>
+
+            {currentUserId && messagedUserIds.map(userId => (
+                <MessageItem key={userId.userId} userId={userId} currentUserId={currentUserId} />
+            ))}
         </div>
     )
-}
+})
 
 export default Messages

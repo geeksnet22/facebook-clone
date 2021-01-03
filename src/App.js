@@ -18,18 +18,23 @@ import NewMessageCreator from './components/NewMessageCreator'
 
 function App() {
 
-  const user = useSelector(selectUser)
+  const currentUser = useSelector(selectUser)
+
+  const [currentUserId, setCurrentUserId] = useState("")
+  const [messagedUsers, setMessagedUsers] = useState([])
+
   const dispatch = useDispatch()
   const likesPopoutContainerRef = useRef()
   const bodyRef = useRef()
   const postLikes = useSelector(selectLikes)
   const dropdownRef = useRef()
+  const messagesRef = useRef()
 
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
       if (userAuth) {
         //user is logged in
-        // send user info to redux store
+        // send user info into redux store
         dispatch(
           login({
             email: userAuth.email,
@@ -38,17 +43,21 @@ function App() {
             photoURL: userAuth.photoURL
           })
         )
+        db.collection("users").onSnapshot((snapshot) => {
+          setCurrentUserId(snapshot.docs.filter(doc => doc.data().email === userAuth.email)[0]?.id)
+        })
       }
       else {
         //user is not logged in
         dispatch(logout())
       }
+
       if ( dropdownRef.current ) {
         dropdownRef.current.style.display = "none"
       }
     })
   }, [])
-
+  
   if ( postLikes.length > 0 ) {
     likesPopoutContainerRef.current.style.display = "block"
   }
@@ -67,13 +76,23 @@ function App() {
     }
   }
 
+  const toggleMessagesMenu = () => {
+    if ( messagesRef.current.style.display === "block" ) {
+      messagesRef.current.style.display = "none"
+    }
+    else {
+      messagesRef.current.style.display = "block"
+    }
+  }
+
   return (
     <div className="app">
-      {!user ? (
+      {!currentUser ? (
         <Login />
       ) : (
         <>
-          <Header toggleDropdown={toggleDropdown} />
+          <Header toggleDropdown={toggleDropdown} 
+                    toggleMessagesMenu={toggleMessagesMenu} />
           <div ref={bodyRef} className="body">
             <Sidebar />
             <Feed />
@@ -81,7 +100,7 @@ function App() {
           </div>
           <Dropdown ref={dropdownRef}/>
           <NewMessageCreator />
-          <Messages />
+          {currentUserId && <Messages currentUserId={currentUserId} ref={messagesRef} />}
           <div ref={likesPopoutContainerRef} className="likes__popout__container">
             <div className="likes__popout__header">
               <div className="likes__container">
@@ -96,7 +115,7 @@ function App() {
             <div className="likes__info__container">
               {postLikes.map(({id, email, displayName, photoURL}) => (
                 <LikesPopoutItem key={id} imgSrc={photoURL} name={displayName}
-                  isCurrentUser={email === user.email} />
+                  isCurrentUser={email === currentUser.email} />
               ))}
             </div>
           </div>

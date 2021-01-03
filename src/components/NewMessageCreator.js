@@ -47,7 +47,7 @@ function NewMessageCreator() {
         selectedUsers.push(userInfo)
         setSelectedUsers(selectedUsers)
         // fetch messages messages for this users combination
-        db.collection(`users/${currentUserId}/chats/${userInfo.uid}/receivedMessages`)
+        db.collection(`users/${currentUserId}/chats/${userInfo.uid}/messages`)
     }
 
     const sendMessage = (e) => {
@@ -57,18 +57,26 @@ function NewMessageCreator() {
             return false
         }
         selectedUsers.forEach(userInfo => {
+            db.collection(`users/${currentUserId}/chats`).doc(`${userInfo.uid}`).set({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            db.collection(`users/${userInfo.uid}/chats`).doc(`${currentUserId}`).set({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
             const sentMessagesReference = db.collection(`users/${currentUserId}/chats/${userInfo.uid}/messages`)
             sentMessagesReference.add({
                     type: "sent",
                     message: messageContent,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    user: userInfo
                 }
             )
             const rcvdMessagesReference = db.collection(`users/${userInfo.uid}/chats/${currentUserId}/messages`)
             rcvdMessagesReference.add({
                     type: "received",
                     message: messageContent,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    user: userInfo
                 }
             )
         })
