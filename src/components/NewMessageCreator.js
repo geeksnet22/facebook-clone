@@ -130,9 +130,9 @@ const NewMessageCreator = forwardRef(({selectedUsersForMessaging,
                     ))}
                 </div>
                 <div ref={messagesSectionRef} className="messages__section">
-                    <MessagesDisplay currentUserId={currentUserId} 
+                    {currentUserId && <MessagesDisplay currentUserId={currentUserId} 
                                             targetUsers={selectedUsersForMessaging} 
-                                            ref={messagesDisplayRef} />
+                                            ref={messagesDisplayRef} />}
                     <div className="message__input">
                         <form>
                             <input value={messageContent} placeholder="Type message here..." 
