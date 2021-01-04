@@ -26,10 +26,10 @@
 }
 
 #message__container > p {
-    text-align: center;
+    text-align: start;
     padding: 5px;
     border-radius: 10px;
-    max-width: 200px;
+    max-width: 175px;
 }
 
 .received > p {

@@ -104,11 +104,12 @@ function App() {
     messageCreatorBodyRef.current.style.display = "flex"
     if ( window.innerWidth <= 500 ) {
       messageCreatorBodyRef.current.style.height = "300px"
+      messageCreatorBodyRef.current.style.width = "260px"
     }
     else {
       messageCreatorBodyRef.current.style.height = "450px"
+      messageCreatorBodyRef.current.style.width = "350px"
     }
-    messageCreatorBodyRef.current.style.width = "350px"
   }
 
   const hideMessageCreator = () => {
