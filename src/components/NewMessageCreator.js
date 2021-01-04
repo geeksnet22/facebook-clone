@@ -24,11 +24,10 @@ const NewMessageCreator = forwardRef(({selectedUsersForMessaging,
     const [currentUserId, setCurrentUserId] = useState("")
 
     const contactSuggestionsRef = useRef()
-    const messagesSectionRef = useRef()
     const messageCreatorRef = useRef()
 
     const { messageCreatorBodyRef, messageCreatorHeaderTitleRef,
-            messageCreatorInputRef, messagesDisplayRef } = ref
+            messageCreatorInputRef, messagesDisplayRef, messagesSectionRef } = ref
 
     useEffect(() => {
         db.collection("users").onSnapshot((snapshot) => {
