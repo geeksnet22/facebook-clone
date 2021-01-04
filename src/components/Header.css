@@ -112,7 +112,7 @@
 }
 
 @media only screen and (max-width: 1260px) {
-    .user_identity {
+    .header__right > .user__identity {
         display: none;
     }
 }
