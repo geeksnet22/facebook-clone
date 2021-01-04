@@ -57,7 +57,7 @@ function Login() {
             <form>
                 <input type="text" placeholder="Full Name (Required for sign up)" value={displayName} onChange={e => setName(e.target.value)} />
                 <input type="text" placeholder="Profile Photo URL" value={photoURL} onChange={e => setPhotoURL(e.target.value)} />
-                <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                <input type="email" placeholder="Email (Anything resembling an email)" value={email} onChange={e => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                 <button type="submit" onClick={signin}>Log In</button>
                 <p>Not a member yet? <span onClick={register}>Sign up</span></p>
