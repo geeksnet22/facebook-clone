@@ -17,6 +17,11 @@
   width: 100%;
   background-color: var(--bodyBackground);
   overflow: scroll;
+  scrollbar-width: none;
+}
+
+.app::-webkit-scrollbar {
+  display: none;
 }
 
 .likes__popout__container {

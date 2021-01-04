@@ -24,7 +24,7 @@ function Header({ toggleDropdown, toggleMessagesMenu }) {
     }
 
     return (
-        <div className="header">
+        <div className="header" id="pageHeader">
             <div className="header__left">
                 <Avatar style={{height: "40px"}} src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png"/>
                 <div className="search__field">

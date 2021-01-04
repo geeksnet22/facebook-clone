@@ -1,4 +1,4 @@
-.header {
+.header#pageHeader {
     position: sticky;
     top: 0;
     z-index: 100;
@@ -13,7 +13,7 @@
     scrollbar-width: none;
 }
 
-.header::-webkit-scrollbar {
+.header#pageHeader::-webkit-scrollbar {
     display: none;
 }
 
@@ -24,7 +24,7 @@
     padding: 5px;
 }
 
-.search__field {
+.header__left > .search__field {
     padding: 5px;
     margin-left: 10px;
     display: flex;
@@ -34,7 +34,7 @@
     align-items: center;
 }
 
-.search__field > form > input {
+.header__left > .search__field > form > input {
     border: none;
     outline: none;
     color: #ffffff;
@@ -43,7 +43,7 @@
     font-size: 14px;
 }
 
-.search__field > form > button {
+.header__left > .search__field > form > button {
     display: none;
 }
 

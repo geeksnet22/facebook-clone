@@ -1,6 +1,11 @@
 .messagesDisplay {
     flex: 1;
     overflow: scroll;
+    scrollbar-width: none;
+}
+
+.messagesDisplay::-webkit-scrollbar {
+    display: none;
 }
 
 .display__container {
