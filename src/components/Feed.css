@@ -34,6 +34,10 @@
     font-size: 14px;
 }
 
+.feed__input > form > input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
 .feed__input > form > button {
     flex: 0;
     border: none;

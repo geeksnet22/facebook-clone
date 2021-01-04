@@ -67,6 +67,10 @@
     font-size: 15px;
 }
 
+.form__container > form > input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
 .form__container > form > button {
     flex: 0;
     border: none;

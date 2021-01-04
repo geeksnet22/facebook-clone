@@ -103,6 +103,10 @@
     font-size: 14px;
 }
 
+.comment__input > form > input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
 .comment__input > form > button {
     flex: 0;
     border: none;

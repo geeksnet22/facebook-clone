@@ -116,6 +116,10 @@
     padding: 5px;
 }
 
+.messages__section > .message__input > form > input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
 .messages__section > .message__input > form > button {
     flex: 0;
     border: none;

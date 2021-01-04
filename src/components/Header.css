@@ -43,6 +43,10 @@
     font-size: 14px;
 }
 
+.header__left > .search__field > form > input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
 .header__left > .search__field > form > button {
     flex: 0;
     border: none;
