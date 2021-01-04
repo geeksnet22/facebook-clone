@@ -33,6 +33,7 @@ function App() {
   const messageCreatorBodyRef = useRef()
   const messageCreatorHeaderTitleRef = useRef()
   const messageCreatorInputRef = useRef()
+  const messagesDisplayRef = useRef()
 
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
@@ -91,6 +92,7 @@ function App() {
 
   const openMessageCreator = (isNewMessage, messagedUser) => {
     if( !isNewMessage ) {
+      messagesDisplayRef.current.style.display = "flex"
       messageCreatorHeaderTitleRef.current.innerHTML = messagedUser.displayName
       messageCreatorInputRef.current.style.display = "none"
       setSelectedUsersForMessaging([messagedUser])
@@ -137,7 +139,8 @@ function App() {
                               ref={{
                                   messageCreatorBodyRef: messageCreatorBodyRef,
                                   messageCreatorHeaderTitleRef: messageCreatorHeaderTitleRef,
-                                  messageCreatorInputRef: messageCreatorInputRef
+                                  messageCreatorInputRef: messageCreatorInputRef,
+                                  messagesDisplayRef: messagesDisplayRef
                                   }}/>
           {currentUserId && <Messages currentUserId={currentUserId} 
                                 openMessageCreator={openMessageCreator} 
