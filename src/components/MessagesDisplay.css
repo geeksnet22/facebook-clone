@@ -3,7 +3,12 @@
     overflow: scroll;
 }
 
-.messagesDisplay > #message__container {
+.display__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.messagesDisplay > .display__container > #message__container {
     display: flex;
     flex: 1;
     color: #ffffff;

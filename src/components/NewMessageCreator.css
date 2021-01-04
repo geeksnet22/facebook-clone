@@ -12,7 +12,6 @@
 
 .message__creation__body {
     background-color: var(--headerBackground);
-    display: none;
     flex: 1;
     flex-direction: column;
     padding: 10px;
@@ -91,7 +90,7 @@
     flex: 1;
     flex-direction: column;
     justify-content: space-between;
-    display: none;
+    display: flex;
     overflow: scroll;
 }
 
@@ -126,5 +125,6 @@
     }
     .create__message__logo {
         margin-left: 10px;
+        background-color: var(--bodyBackground);
     }
 }

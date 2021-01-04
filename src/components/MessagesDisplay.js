@@ -1,26 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../features/userSlice'
+import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import { db } from '../Firebase'
 import './MessagesDisplay.css'
 
-function MessagesDisplay({ currentUserId, otherUserId }) {
+const MessagesDisplay = forwardRef(({ currentUserId, targetUsers }, ref) => {
 
-    const user = useSelector(selectUser)
     const [messages, setMessages] = useState([])
     const messagesDisplayRef = useRef()
 
     useEffect(() => {
-        db.collection(`users/${currentUserId}/chats/${otherUserId}/messages`)
-        .orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-            setMessages(snapshot.docs.reverse().map((doc) => (
+        if (targetUsers && targetUsers.length > 0) {
+            db.collection(`users/${currentUserId}/chats/${targetUsers[0].uid}/messages`)
+            .orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+            setMessages(snapshot.docs.reverse().map((doc) => {
+                return(
                 {
                     id: doc.id,
                     data: doc.data()
-                }
-            )))
-        })
-    }, [])
+                })
+            }))})
+        }
+    }, [targetUsers.length, targetUsers[0]])
 
     if (messagesDisplayRef.current){
         messagesDisplayRef.current.scrollTop = messagesDisplayRef.current.scrollHeight 
@@ -29,13 +28,15 @@ function MessagesDisplay({ currentUserId, otherUserId }) {
     
     return (
         <div ref={messagesDisplayRef} className="messagesDisplay">
-            {messages.map(({id, data: {type, message, timestamp}}) => (
-                    <div key={id} className={type} id="message__container">
-                        <p>{message}</p>
-                    </div>
-            ))}
+            <div ref={ref} className="display__container">
+                {messages.map(({id, data: {type, message, timestamp}}) => {
+                        return <div key={id} className={type} id="message__container">
+                            <p>{message}</p>
+                        </div>
+            })}
+            </div>
         </div>
     )
-}
+})
 
 export default MessagesDisplay

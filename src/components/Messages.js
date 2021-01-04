@@ -7,7 +7,7 @@ import MessageItem from './MessageItem'
 import './Messages.css'
 import { db } from '../Firebase'
 
-const Messages = forwardRef(({currentUserId}, ref) => {
+const Messages = forwardRef(({currentUserId, openMessageCreator}, ref) => {
     
     const [messagedUserIds, setMessagedUserIds] = useState([])
 
@@ -44,7 +44,7 @@ const Messages = forwardRef(({currentUserId}, ref) => {
 
             {currentUserId && messagedUserIds.map(messagedUserId => (
                 <MessageItem key={messagedUserId.userId} messagedUserId={messagedUserId} 
-                    currentUserId={currentUserId} />
+                    currentUserId={currentUserId} openMessageCreator={openMessageCreator} />
             ))}
         </div>
     )

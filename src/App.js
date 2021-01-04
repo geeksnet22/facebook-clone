@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
@@ -19,14 +19,20 @@ import NewMessageCreator from './components/NewMessageCreator'
 function App() {
 
   const currentUser = useSelector(selectUser)
-  const [currentUserId, setCurrentUserId] = useState("")
-
+  const postLikes = useSelector(selectLikes)
   const dispatch = useDispatch()
+
+  const [currentUserId, setCurrentUserId] = useState("")
+  const [selectedUsersForMessaging, setSelectedUsersForMessaging] = useState([])
+
   const likesPopoutContainerRef = useRef()
   const bodyRef = useRef()
-  const postLikes = useSelector(selectLikes)
   const dropdownRef = useRef()
   const messagesRef = useRef()
+
+  const messageCreatorBodyRef = useRef()
+  const messageCreatorHeaderTitleRef = useRef()
+  const messageCreatorInputRef = useRef()
 
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
@@ -83,6 +89,32 @@ function App() {
     }
   }
 
+  const openMessageCreator = (isNewMessage, messagedUser) => {
+    if( !isNewMessage ) {
+      messageCreatorHeaderTitleRef.current.innerHTML = messagedUser.displayName
+      messageCreatorInputRef.current.style.display = "none"
+      setSelectedUsersForMessaging([messagedUser])
+    }
+    else {
+      messageCreatorHeaderTitleRef.current.innerHTML = "New Message"
+      messageCreatorInputRef.current.style.display = "flex"
+      setSelectedUsersForMessaging([])
+    }
+    messagesRef.current.style.display = "none"
+    messageCreatorBodyRef.current.style.display = "flex"
+    if ( window.innerWidth <= 500 ) {
+      messageCreatorBodyRef.current.style.height = "300px"
+    }
+    else {
+      messageCreatorBodyRef.current.style.height = "450px"
+    }
+    messageCreatorBodyRef.current.style.width = "350px"
+  }
+
+  const hideMessageCreator = () => {
+    messageCreatorBodyRef.current.style.display = "none"
+  }
+
   return (
     <div className="app">
       {!currentUser ? (
@@ -97,13 +129,23 @@ function App() {
             <Contacts />
           </div>
           <Dropdown ref={dropdownRef}/>
-          <NewMessageCreator />
-          {currentUserId && <Messages currentUserId={currentUserId} ref={messagesRef} />}
+          <NewMessageCreator selectedUsersForMessaging={selectedUsersForMessaging}
+                              setSelectedUsersForMessaging={setSelectedUsersForMessaging} 
+                              openMessageCreator={openMessageCreator} 
+                              hideMessageCreator={hideMessageCreator} 
+                              ref={{
+                                  messageCreatorBodyRef: messageCreatorBodyRef,
+                                  messageCreatorHeaderTitleRef: messageCreatorHeaderTitleRef,
+                                  messageCreatorInputRef: messageCreatorInputRef
+                                  }}/>
+          {currentUserId && <Messages currentUserId={currentUserId} 
+                                openMessageCreator={openMessageCreator} 
+                                ref={messagesRef} />}
           <div ref={likesPopoutContainerRef} className="likes__popout__container">
             <div className="likes__popout__header">
               <div className="likes__container">
                 <ThumbUpIcon style={{height: "15px", width: "15px", padding: "5px", 
-                borderRadius: "50%", backgroundColor: "#4267B2"}}/>
+                        borderRadius: "50%", backgroundColor: "#4267B2"}} />
                 <p style={{color: "#4267B2"}}>{postLikes.length}</p>
               </div>
               <div className="popout__close__container" onClick={closeLikesPopout} >
@@ -113,7 +155,7 @@ function App() {
             <div className="likes__info__container">
               {postLikes.map(({id, email, displayName, photoURL}) => (
                 <LikesPopoutItem key={id} imgSrc={photoURL} displayName={displayName}
-                  isCurrentUser={email === currentUser.email} />
+                        isCurrentUser={email === currentUser.email} />
               ))}
             </div>
           </div>

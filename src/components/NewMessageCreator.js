@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import './NewMessageCreator'
 import CloseIcon from '@material-ui/icons/Close'
 import CreateIcon from '@material-ui/icons/Create'
@@ -10,21 +10,26 @@ import firebase from 'firebase'
 import MessagesDisplay from './MessagesDisplay'
 import './NewMessageCreator.css'
 
-function NewMessageCreator() {
+const NewMessageCreator = forwardRef(({selectedUsersForMessaging, 
+                                        setSelectedUsersForMessaging, 
+                                        openMessageCreator, 
+                                        hideMessageCreator}, ref) => {
 
     const user = useSelector(selectUser)
 
     const [users, setUsers] = useState([])
     const [filteredUsers, setFilteredUsers] = useState([])
     const [username, setUsername] = useState("")
-    const [selectedUsers, setSelectedUsers] = useState([])
     const [messageContent, setMessageContent] = useState("")
     const [currentUserId, setCurrentUserId] = useState("")
 
-    const messageCreationBodyRef = useRef()
     const contactSuggestionsRef = useRef()
     const messagesSectionRef = useRef()
     const messageCreatorRef = useRef()
+    const messagesDisplayRef = useRef()
+
+    const { messageCreatorBodyRef, messageCreatorHeaderTitleRef,
+            messageCreatorInputRef } = ref
 
     useEffect(() => {
         db.collection("users").onSnapshot((snapshot) => {
@@ -38,25 +43,24 @@ function NewMessageCreator() {
                 doc.data().email === user.email
             ))[0].id)
         })
-    }, [])
+    }, [selectedUsersForMessaging])
 
     const processUserSelection = (userInfo) => {
         contactSuggestionsRef.current.style.display = "none"
         messagesSectionRef.current.style.display = "flex"
+        messagesDisplayRef.current.style.display = "flex"
         setUsername(userInfo.displayName)
-        selectedUsers.push(userInfo)
-        setSelectedUsers(selectedUsers)
-        // fetch messages messages for this users combination
-        db.collection(`users/${currentUserId}/chats/${userInfo.uid}/messages`)
+        selectedUsersForMessaging.push(userInfo)
+        setSelectedUsersForMessaging(selectedUsersForMessaging)
     }
 
     const sendMessage = (e) => {
         e.preventDefault()
-        if ( selectedUsers.length == 0 ) {
+        if ( selectedUsersForMessaging.length == 0 ) {
             alert("No user selected")
             return false
         }
-        selectedUsers.forEach(userInfo => {
+        selectedUsersForMessaging.forEach(userInfo => {
             db.collection(`users/${currentUserId}/chats`).doc(`${userInfo.uid}`).set({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             })
@@ -76,7 +80,7 @@ function NewMessageCreator() {
                     type: "received",
                     message: messageContent,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    user: user
+                    user: {...user, uid: currentUserId}
                 }
             )
         })
@@ -88,31 +92,27 @@ function NewMessageCreator() {
         setUsername(e.target.value)
         if (!e.target.value) {
             contactSuggestionsRef.current.style.display = "none"
-            setSelectedUsers([])
         }
         else {
             contactSuggestionsRef.current.style.display = "flex"
             setFilteredUsers(users.filter(({data: {displayName}}) =>
                 displayName.toLowerCase().includes(e.target.value.toLowerCase())))
         }
+        setSelectedUsersForMessaging([])
     }
     
     return (
         <div ref={messageCreatorRef} className="newMessageCreator">
-            <div ref={messageCreationBodyRef} className="message__creation__body">
+            <div ref={messageCreatorBodyRef} className="message__creation__body">
                 <div className="top__portion">
                     <div className="message__header">
-                        <p>New Message</p>
+                        <p ref={messageCreatorHeaderTitleRef}>New Message</p>
                         <div className="close__icon__container" 
-                            onClick={() => {
-                                            messageCreationBodyRef.current.style.display = "none"
-                                            messageCreatorRef.current.style.width = "fit-content"
-                                            messageCreatorRef.current.style.height = "fit-content"
-                                            }}>
+                            onClick={hideMessageCreator}>
                             <CloseIcon fontSize="default" style={{color: "#4267B2"}}/>
                         </div>
                     </div>
-                    <div className="message__form__container">
+                    <div ref={messageCreatorInputRef} className="message__form__container">
                         <p>To:</p>
                         <form>
                             <input type="text" value={username} onChange={e => handleUsernameInput(e)} />
@@ -132,8 +132,9 @@ function NewMessageCreator() {
                     ))}
                 </div>
                 <div ref={messagesSectionRef} className="messages__section">
-                    {selectedUsers.length > 0 && <MessagesDisplay currentUserId={currentUserId} 
-                        otherUserId={selectedUsers[0].uid} />}
+                    <MessagesDisplay currentUserId={currentUserId} 
+                                            targetUsers={selectedUsersForMessaging} 
+                                            ref={messagesDisplayRef} />
                     <div className="message__input">
                         <form>
                             <input value={messageContent} placeholder="Type message here..." 
@@ -145,20 +146,14 @@ function NewMessageCreator() {
             </div>
             <div className="create__message__logo" 
                 onClick={() => {
-                                messageCreationBodyRef.current.style.display = "flex"
-                                if ( window.innerWidth < 500 ) {
-                                    messageCreatorRef.current.style.width = "350px"
-                                    messageCreatorRef.current.style.height = "300px"
-                                }
-                                else {
-                                    messageCreatorRef.current.style.width = "400px"
-                                    messageCreatorRef.current.style.height = "450px"
-                                }
+                                messagesDisplayRef.current.style.display = "none"
+                                setUsername("")
+                                openMessageCreator(true, "")
                                 }} >
                 <CreateIcon />
             </div>
         </div>
     )
-}
+})
 
 export default NewMessageCreator
