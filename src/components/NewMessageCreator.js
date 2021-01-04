@@ -143,8 +143,9 @@ const NewMessageCreator = forwardRef(({selectedUsersForMessaging,
                 </div>
             </div>
             <div className="create__message__logo" 
-                onClick={() => {
-                                messagesDisplayRef.current.style.display = "none"
+                onClick={() => {if (messagesDisplayRef.current) {
+                                    messagesDisplayRef.current.style.display = "none"
+                                }
                                 setUsername("")
                                 openMessageCreator(true, "")
                                 }} >
