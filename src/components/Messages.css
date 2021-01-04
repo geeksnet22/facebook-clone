@@ -68,7 +68,8 @@
 }
 
 .form__container > form > button {
-    display: none;
+    flex: 0;
+    border: none;
 }
 
 .message__items__container {

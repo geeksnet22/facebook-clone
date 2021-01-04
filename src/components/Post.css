@@ -104,7 +104,8 @@
 }
 
 .comment__input > form > button {
-    display: none;
+    flex: 0;
+    border: none;
 }
 
 .post__reactions p:hover {

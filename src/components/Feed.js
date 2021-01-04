@@ -40,9 +40,9 @@ function Feed() {
                 <Avatar src={user.photoURL} />
                 <div className="feed__input">
                     <form>
-                        <input value={input} type="text" onChange={(e) => setInput(e.target.value)} 
+                        <input value={input} type="text" onChange={(e) => {setInput(e.target.value)}} 
                             placeholder={`What's on your mind, ${user.displayName?.split(' ')[0] || 'user'}?`} />
-                        <button onClick={sendPost} type="submit">Submit</button>
+                        <button onClick={sendPost} type="submit"></button>
                     </form>
                 </div>
             </div>

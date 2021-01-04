@@ -44,7 +44,8 @@
 }
 
 .header__left > .search__field > form > button {
-    display: none;
+    flex: 0;
+    border: none;
 }
 
 .header__center {

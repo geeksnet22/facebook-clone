@@ -162,7 +162,7 @@ const Post = forwardRef(({postId, message, user}, ref) => {
                         <input ref={commentInputRef} value={commentInput} type="text" 
                         onChange={(e) => setCommentInput(e.target.value)}
                             placeholder="Write a comment..." />
-                        <button onClick={processComment} type="submit">Submit</button>
+                        <button onClick={processComment} type="submit"></button>
                     </form>
                 </div>
             </div>

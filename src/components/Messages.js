@@ -37,7 +37,7 @@ const Messages = forwardRef(({currentUserId, openMessageCreator}, ref) => {
                     <SearchIcon style={{marginLeft: "5px", height:"20px", width:"20px"}} />
                     <form>
                         <input type="text" placeholder="Search Messenger"/>
-                        <button>Search Contacts</button>
+                        <button></button>
                     </form>
                 </div>
             </div>

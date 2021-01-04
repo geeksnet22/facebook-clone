@@ -60,7 +60,8 @@
 }
 
 .message__form__container > form > button {
-    display: none;
+    flex: 0;
+    border: none;
 }
 
 .create__message__logo {
@@ -116,7 +117,8 @@
 }
 
 .messages__section > .message__input > form > button {
-    display: none;
+    flex: 0;
+    border: none;
 }
 
 @media only screen and (max-width: 900px) {

@@ -114,7 +114,7 @@ const NewMessageCreator = forwardRef(({selectedUsersForMessaging,
                         <p>To:</p>
                         <form>
                             <input type="text" value={username} onChange={e => handleUsernameInput(e)} />
-                            <button type="submit" onClick={(e) => e.preventDefault()}>Send Message</button>
+                            <button type="submit" onClick={(e) => e.preventDefault()}></button>
                         </form>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ const NewMessageCreator = forwardRef(({selectedUsersForMessaging,
                         <form>
                             <input value={messageContent} placeholder="Type message here..." 
                                 onChange={e => setMessageContent(e.target.value)} type="text"/>
-                            <button onClick={sendMessage} type="submit">Send Message</button>
+                            <button onClick={sendMessage} type="submit"></button>
                         </form>
                     </div>
                 </div>

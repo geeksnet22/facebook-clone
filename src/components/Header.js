@@ -31,7 +31,7 @@ function Header({ toggleDropdown, toggleMessagesMenu }) {
                     <SearchIcon />
                     <form>
                         <input type="text" value={searchText} placeholder="Search Facebook" onChange={e => setSearchText(e.target.value)}/>
-                        <button onClick={processSearch} type="submit">Submit</button>
+                        <button onClick={processSearch} type="submit"></button>
                     </form>
                 </div>
             </div>
