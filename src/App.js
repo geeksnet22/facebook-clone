@@ -62,7 +62,7 @@ function App() {
         dropdownRef.current.style.display = "none"
       }
     })
-  }, [currentUserId])
+  }, [])
   
   if ( postLikes.length > 0 ) {
     likesPopoutContainerRef.current.style.display = "block"
