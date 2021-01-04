@@ -9,10 +9,10 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded'
 import ChatBubbleRoundedIcon from '@material-ui/icons/ChatBubbleRounded'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import ArrowDropDownRoundedIcon from '@material-ui/icons/ArrowDropDownRounded'
-import './Header.css'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
 import HeaderIcons from './HeaderIcons';
+import './Header.css'
 
 function Header({ toggleDropdown, toggleMessagesMenu }) {
 
@@ -42,7 +42,7 @@ function Header({ toggleDropdown, toggleMessagesMenu }) {
                 <HeaderIcons Icon={SupervisedUserCircleOutlinedIcon}/>
             </div>
             <div className="header__right">
-                <div className="user_identity">
+                <div className="user__identity">
                     <Avatar style={{height: "37px", width: "37px"}} src={user.photoURL}/>
                     <h4>{user.displayName?.split(" ")[0]}</h4>
                 </div>

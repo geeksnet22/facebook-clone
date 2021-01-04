@@ -16,12 +16,14 @@ function Sidebar() {
                 <Avatar src={user.photoURL} />
                 <h4>{user.displayName?.split(" ")[0]}</h4>
             </div>
-            <SidebarItem Icon={PeopleAltIcon} text="Friends"/>
-            <SidebarItem Icon={PeopleAltIcon} text="Groups"/>
-            <SidebarItem Icon={PeopleAltIcon} text="Marketplace"/>
-            <SidebarItem Icon={PeopleAltIcon} text="Videos"/>
-            <SidebarItem Icon={PeopleAltIcon} text="Events"/>
-            <SidebarItem Icon={PeopleAltIcon} text="Memories"/>
+            <div className="sidebar__icons">
+                <SidebarItem Icon={PeopleAltIcon} text="Friends"/>
+                <SidebarItem Icon={PeopleAltIcon} text="Groups"/>
+                <SidebarItem Icon={PeopleAltIcon} text="Marketplace"/>
+                <SidebarItem Icon={PeopleAltIcon} text="Videos"/>
+                <SidebarItem Icon={PeopleAltIcon} text="Events"/>
+                <SidebarItem Icon={PeopleAltIcon} text="Memories"/>
+            </div>
         </div>
     )
 }

@@ -70,16 +70,24 @@
 .header__right {
     display: flex;
     flex: 0.2;
-    align-items: flex-end;
+    align-items: center;
     padding-right: 5px;
 }
 
-.user_identity {
+.header__right > .user__identity {
     display: flex;
     align-items: center;
+    border-radius: 20px;
+    height: fit-content;
+    padding: 3px 5px;
 }
 
-.user_identity > h4 {
+.header__right > .user__identity:hover {
+    background-color: var(--searchBackground);
+    cursor: pointer;
+}
+
+.header__right > .user__identity > h4 {
     color: #ffffff;
     font-size: 20px;
     margin-left: 8px;

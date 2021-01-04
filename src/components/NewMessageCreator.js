@@ -114,7 +114,7 @@ const NewMessageCreator = forwardRef(({selectedUsersForMessaging,
                         <p>To:</p>
                         <form>
                             <input type="text" value={username} onChange={e => handleUsernameInput(e)} />
-                            <button type="submit">Send Message</button>
+                            <button type="submit" onClick={(e) => e.preventDefault()}>Send Message</button>
                         </form>
                     </div>
                 </div>
