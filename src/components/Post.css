@@ -14,10 +14,18 @@
     align-items: flex-start;
 }
 
+.post__header:hover {
+    cursor: pointer;
+}
+
 .post__header > h2 {
     color: #ffffff;
     font-size: 20px;
     margin-left: 10px;
+}
+
+.post__header > h2:hover {
+    text-decoration: underline;
 }
 
 .post__message > p{
