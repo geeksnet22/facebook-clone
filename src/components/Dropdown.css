@@ -11,7 +11,6 @@
     background-color: var(--bodyBackground);
     border-radius: 10px;
     box-shadow: 1px 1px #ffffff;
-    z-index: 200;
 }
 
 .user__info__container {
