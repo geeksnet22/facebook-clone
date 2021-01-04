@@ -20,7 +20,7 @@ const Messages = forwardRef(({currentUserId, openMessageCreator}, ref) => {
               }
             )))
           })
-    }, [])
+    }, [currentUserId])
 
     return (
         <div ref={ref} className="messages">

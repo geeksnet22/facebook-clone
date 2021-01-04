@@ -11,7 +11,7 @@ function MessageItem({ messagedUserId, currentUserId, openMessageCreator }) {
         db.collection(`users/${currentUserId}/chats/${messagedUserId.userId}/messages`)
         .orderBy("timestamp", "desc").onSnapshot((snapshot) => {
             setMessageData(snapshot.docs[0]?.data())})
-    }, [])
+    }, [currentUserId, messagedUserId])
 
     return (
         <div className="messageItem" onClick={() => openMessageCreator(false, messageData.user)}>

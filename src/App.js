@@ -49,9 +49,11 @@ function App() {
             photoURL: userAuth.photoURL
           })
         )
-        db.collection("users").onSnapshot((snapshot) => {
-          setCurrentUserId(snapshot.docs.filter(doc => doc.data().email === userAuth.email)[0]?.id)
-        })
+        db.collection("users").where("email", "==", userAuth.email)
+        .get()
+        .then((snapshot) => (
+          setCurrentUserId(snapshot.docs[0].id)
+        ))
       }
       else {
         //user is not logged in
