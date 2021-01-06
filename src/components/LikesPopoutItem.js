@@ -5,7 +5,7 @@ import './LikesPopoutItem.css'
 
 function LikesPopoutItem({ imgSrc, displayName, isCurrentUser }) {
     return (
-        <div className="likesPopout">
+        <div className="likesPopoutItem">
             <div className="comment__item__container">
                 <div className="user__info__container">
                     <Avatar src={imgSrc} />

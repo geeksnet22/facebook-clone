@@ -8,24 +8,19 @@ import Login from './components/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser, login, logout } from './features/userSlice'
 import { auth, db } from './Firebase'
-import LikesPopoutItem from './components/LikesPopoutItem'
-import { hideLikes, selectLikes } from './features/likesSlice'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
-import CloseIcon from '@material-ui/icons/Close'
 import Dropdown from './components/Dropdown'
 import Messages from './components/Messages'
 import NewMessageCreator from './components/NewMessageCreator'
+import LikesPopout from './components/LikesPopout'
 
 function App() {
 
   const currentUser = useSelector(selectUser)
-  const postLikes = useSelector(selectLikes)
   const dispatch = useDispatch()
 
   const [currentUserId, setCurrentUserId] = useState("")
   const [selectedUsersForMessaging, setSelectedUsersForMessaging] = useState([])
 
-  const likesPopoutContainerRef = useRef()
   const bodyRef = useRef()
   const dropdownRef = useRef()
   const messagesRef = useRef()
@@ -39,7 +34,7 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
       if (userAuth) {
-        //user is logged in
+        // user is logged in
         // send user info into redux store
         dispatch(
           login({
@@ -66,14 +61,6 @@ function App() {
     })
   }, [])
   
-  if ( postLikes.length > 0 ) {
-    likesPopoutContainerRef.current.style.display = "block"
-  }
-
-  const closeLikesPopout = () => {
-    likesPopoutContainerRef.current.style.display = "none"
-    dispatch(hideLikes())
-  }
 
   const toggleDropdown = () => {
     if ( dropdownRef.current.style.display === "block" ) {
@@ -134,39 +121,22 @@ function App() {
             <Sidebar />
             <Feed />
             <Contacts />
-          </div>
-          <Dropdown ref={dropdownRef}/>
-          <NewMessageCreator selectedUsersForMessaging={selectedUsersForMessaging}
-                              setSelectedUsersForMessaging={setSelectedUsersForMessaging} 
-                              openMessageCreator={openMessageCreator} 
-                              hideMessageCreator={hideMessageCreator} 
-                              ref={{
-                                  messageCreatorBodyRef: messageCreatorBodyRef,
-                                  messageCreatorHeaderTitleRef: messageCreatorHeaderTitleRef,
-                                  messageCreatorInputRef: messageCreatorInputRef,
-                                  messagesDisplayRef: messagesDisplayRef,
-                                  messagesSectionRef: messagesSectionRef
-                                  }}/>
-          {currentUserId && <Messages currentUserId={currentUserId} 
+            <Dropdown ref={dropdownRef}/>
+            <NewMessageCreator selectedUsersForMessaging={selectedUsersForMessaging}
+                                setSelectedUsersForMessaging={setSelectedUsersForMessaging} 
                                 openMessageCreator={openMessageCreator} 
-                                ref={messagesRef} />}
-          <div ref={likesPopoutContainerRef} className="likes__popout__container">
-            <div className="likes__popout__header">
-              <div className="likes__container">
-                <ThumbUpIcon style={{height: "15px", width: "15px", padding: "5px", 
-                        borderRadius: "50%", backgroundColor: "#4267B2"}} />
-                <p style={{color: "#4267B2"}}>{postLikes.length}</p>
-              </div>
-              <div className="popout__close__container" onClick={closeLikesPopout} >
-                <CloseIcon />
-              </div>
-            </div>
-            <div className="likes__info__container">
-              {postLikes.map(({id, email, displayName, photoURL}) => (
-                <LikesPopoutItem key={id} imgSrc={photoURL} displayName={displayName}
-                        isCurrentUser={email === currentUser.email} />
-              ))}
-            </div>
+                                hideMessageCreator={hideMessageCreator}
+                                ref={{
+                                    messageCreatorBodyRef: messageCreatorBodyRef,
+                                    messageCreatorHeaderTitleRef: messageCreatorHeaderTitleRef,
+                                    messageCreatorInputRef: messageCreatorInputRef,
+                                    messagesDisplayRef: messagesDisplayRef,
+                                    messagesSectionRef: messagesSectionRef
+                                    }}/>
+            {currentUserId && <Messages currentUserId={currentUserId} 
+                                  openMessageCreator={openMessageCreator} 
+                                  ref={messagesRef} />}
+            <LikesPopout />
           </div>
         </>
       )}

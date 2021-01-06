@@ -1,0 +1,41 @@
+.likesPopout {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    max-height: 500px;
+    padding: 15px;
+    background-color: var(--bodyBackground);
+    border-radius: 10px;
+    display: none;
+    color: #ffffff;
+    box-shadow: 1px 1px #ffffff;
+  }
+  
+  .likes__popout__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 0.1px solid white;
+  }
+  
+  .likes__container {
+    padding: 0 10px;
+  }
+  
+  .popout__close__container {
+    padding: 4px;
+    border-radius: 50%;
+    background-color: var(--searchBackground);
+  }
+  
+  .popout__close__container:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+  
+  .likes__info__container {
+    padding-top: 15px;
+  }
