@@ -12,6 +12,7 @@ import Dropdown from './components/Dropdown'
 import Messages from './components/Messages'
 import NewMessageCreator from './components/NewMessageCreator'
 import LikesPopout from './components/LikesPopout'
+import UserProfile from './components/UserProfile'
 
 function App() {
 
@@ -117,6 +118,7 @@ function App() {
         <>
           <Header toggleDropdown={toggleDropdown} 
                     toggleMessagesMenu={toggleMessagesMenu} />
+          {/* <UserProfile /> */}
           <div ref={bodyRef} className="body">
             <Sidebar />
             <Feed />

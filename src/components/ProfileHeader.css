@@ -1,0 +1,81 @@
+.profileHeader {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 100%;
+    background-color: gray;
+    align-items: center;
+    color: #ffffff;
+}
+
+.profileHeader > .cover__photo__container {
+    flex: 0.7;
+    width: 80%;
+    background-color: red;
+}
+
+.profileHeader > .user__info__container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 0.2;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: -190px;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid whitesmoke;
+    border-radius: 0;
+    width: 75%;
+}
+
+.profileHeader > .user__info__container > h1 {
+    font-size: 45px;
+}
+
+.profileHeader > .header__items {
+    display: flex;
+    flex: 0.1;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+}
+
+.profileHeader > .header__items > .left__portion {
+    height: 100%;
+}
+
+.profileHeader > .header__items > .left__portion > * {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 90%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.profileHeader > .header__items > .left__portion > *:hover {
+    background-color: red;
+}
+
+.profileHeader > .header__items > .right__portion {
+    display: flex;
+}
+
+.profileHeader > .header__items > .right__portion > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    background-color: red;
+}
+
+.profileHeader > .header__items > .right__portion > *:hover {
+    background-color: red;
+}
+
+.profileHeader > .header__items > .right__portion > .message__container {
+    display: flex;
+}
