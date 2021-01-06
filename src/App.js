@@ -82,6 +82,8 @@ function App() {
   }
 
   const openMessageCreator = (isNewMessage, messagedUser) => {
+    messagesRef.current.style.display = "none"
+    messageCreatorBodyRef.current.style.display = "flex"
     if( !isNewMessage ) {
       messagesSectionRef.current.style.display = "flex"
       messagesDisplayRef.current.style.display = "flex"
@@ -94,8 +96,6 @@ function App() {
       messageCreatorInputRef.current.style.display = "flex"
       setSelectedUsersForMessaging([])
     }
-    messagesRef.current.style.display = "none"
-    messageCreatorBodyRef.current.style.display = "flex"
     if ( window.innerWidth <= 500 ) {
       messageCreatorBodyRef.current.style.height = "300px"
       messageCreatorBodyRef.current.style.width = "260px"

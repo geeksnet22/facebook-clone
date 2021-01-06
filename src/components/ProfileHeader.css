@@ -41,6 +41,10 @@
     width: 75%;
 }
 
+.profileHeader > .header__items > * {
+    cursor: pointer;
+}
+
 .profileHeader > .header__items > .left__portion {
     height: 100%;
 }
