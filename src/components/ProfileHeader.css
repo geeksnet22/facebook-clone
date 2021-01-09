@@ -10,7 +10,7 @@
 
 .profileHeader > .cover__photo__container {
     flex: 0.7;
-    width: 940px;
+    width: 60%;
     background-color: var(--bodyBackground);
 }
 
@@ -26,11 +26,12 @@
     padding-bottom: 20px;
     border-bottom: 1px solid whitesmoke;
     border-radius: 0;
-    width: 800px;
+    width: 50%;
 }
 
 .profileHeader > .user__container > h1 {
     font-size: 45px;
+    text-align: center;
 }
 
 .profileHeader > .header__items {
@@ -38,7 +39,7 @@
     flex: 0.1;
     justify-content: space-between;
     align-items: center;
-    width: 800px;
+    width: 50%;
 }
 
 .profileHeader > .header__items > * {
@@ -78,4 +79,48 @@
 
 .profileHeader > .header__items > .right__portion > .message__container {
     display: flex;
+}
+
+@media only screen and (max-width: 1400px) {
+    .profileHeader > .cover__photo__container {
+        width: 90%;
+    }
+
+    .profileHeader > .user__container {
+        width: 70%;
+    }
+
+    .profileHeader > .header__items {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .profileHeader > .cover__photo__container {
+        width: 100%;
+    }
+
+    .profileHeader > .user__container {
+        width: 90%;
+    }
+
+    .profileHeader > .header__items {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 775px) {
+    .profileHeader > .header__items {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .profileHeader > .header__items > .left__portion {
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+        justify-content: center;
+    }
 }

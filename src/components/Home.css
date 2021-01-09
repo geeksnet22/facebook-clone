@@ -5,13 +5,13 @@
 }
 
 @media only screen and (max-width: 900px) {
-    .home {
-      justify-content: center;
-    }
+  .home {
+    justify-content: center;
   }
+}
   
-  @media only screen and (max-width: 1100px) {
-    .home {
-        justify-content: space-evenly;
-    }
+@media only screen and (max-width: 1100px) {
+  .home {
+      justify-content: space-evenly;
   }
+}

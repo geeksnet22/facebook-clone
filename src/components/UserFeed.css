@@ -42,3 +42,9 @@
     flex: 0;
     border: none;
 }
+
+@media only screen and (max-width: 500px) {
+    .userFeed {
+        width: 90%;
+    }
+}
