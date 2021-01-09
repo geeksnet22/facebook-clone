@@ -8,11 +8,12 @@ import './UserFeed.css'
 
 function UserFeed( {user} ) {
 
+    
     const [input, setInput] = useState("")
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        db.collection("posts").where("user.email", "==", user.email).orderBy("timestamp", "desc").onSnapshot((snapshot) => (
+        db.collection("posts").where("user.uid", "==", user.uid).orderBy("timestamp", "desc").onSnapshot((snapshot) => (
             setPosts(snapshot.docs.map((doc) => (
                 {
                     id: doc.id,

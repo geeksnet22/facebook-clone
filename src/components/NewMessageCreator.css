@@ -8,6 +8,7 @@
     border-radius: 10px;
     display: flex;
     justify-content: flex-end;
+    z-index: 150;
 }
 
 .message__creation__body {

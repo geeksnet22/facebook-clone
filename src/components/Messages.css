@@ -11,6 +11,7 @@
     height: 90%;
     overflow: scroll;
     display: none;
+    z-index: 125;
 }
 
 .header {

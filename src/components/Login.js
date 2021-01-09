@@ -43,7 +43,7 @@ function Login() {
                     photoURL: photoURL
                 }
             ))
-        }).then(db.collection("users").add({
+        }).then(db.collection("users").doc(`${userAuth.user.uid}`).set({
             email: email,
             displayName: displayName,
             photoURL: photoURL,

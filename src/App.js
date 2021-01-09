@@ -21,7 +21,6 @@ function App() {
   const [currentUserId, setCurrentUserId] = useState("")
   const [selectedUsersForMessaging, setSelectedUsersForMessaging] = useState([])
 
-  const bodyRef = useRef()
   const dropdownRef = useRef()
   const messagesRef = useRef()
 
@@ -136,7 +135,7 @@ function App() {
           <Router>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/user" render={() => (currentUser && <UserProfile user={currentUser}/>)} />
+              <Route path="/user/:id" render={(props) => (currentUser && <UserProfile {...props}/>)} />
             </Switch>
           </Router>
         </>

@@ -14,6 +14,7 @@ import CommentItem from './CommentItem'
 import FlipMove from 'react-flip-move'
 import { useDispatch } from 'react-redux'
 import { displayLikes } from '../features/likesSlice'
+import { Link } from 'react-router-dom' 
 
 const Post = forwardRef(({postId, message, user}, ref) => {
 
@@ -29,6 +30,11 @@ const Post = forwardRef(({postId, message, user}, ref) => {
     const commentsRef = useRef()
     const commentInputContainerRef = useRef()
     const commentInputRef = useRef()
+
+    const linkStyle = {
+        color: "#ffffff",
+        textDecoration: "none"
+    }
 
     useEffect(() => {
         const likesDataRef = db.collection(`posts/${postId}/likes`).orderBy("timestamp", "desc")
@@ -107,11 +113,13 @@ const Post = forwardRef(({postId, message, user}, ref) => {
         }
     }
 
+
+
     return (
         <div ref={ref} className="post">
             <div className="post__header">
                 <Avatar src={user.photoURL}/>
-                <h2>{user.displayName}</h2>
+                <h2><Link style={linkStyle} to={`user/${user.uid}`}>{user.displayName}</Link></h2>
             </div>
             <div className="post__message">
                 <p>{message}</p>
