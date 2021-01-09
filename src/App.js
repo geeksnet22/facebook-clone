@@ -134,7 +134,7 @@ function App() {
           <LikesPopout />
           <Router>
             <Switch>
-              <Route path="/" exact component={Home} />
+              <Route path="/" exact render={(props) => <Home openMessageCreator={openMessageCreator} />} />
               <Route path="/user/:id" render={(props) => (currentUser && <UserProfile {...props}/>)} />
             </Switch>
           </Router>

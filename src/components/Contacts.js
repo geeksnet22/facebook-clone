@@ -5,7 +5,7 @@ import { db } from '../Firebase'
 import ContactItem from './ContactItem'
 import './Contacts.css'
 
-function Contacts() {
+function Contacts({ openMessageCreator }) {
     const user = useSelector(selectUser)
     const [contacts, setContacts] = useState([])
     useEffect(() => {
@@ -24,8 +24,11 @@ function Contacts() {
             <h2>Contacts</h2>
             {contacts.map(({id, data: {displayName, email, photoURL}}) => (
                 email !== user.email && <ContactItem key={id}
+                            uid={id}
+                            email={email}
                             displayName={displayName}
-                            photoURL={photoURL}/>
+                            photoURL={photoURL}
+                            openMessageCreator={openMessageCreator}/>
             ))}
         </div>
     )

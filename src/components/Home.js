@@ -4,12 +4,12 @@ import Feed from './Feed'
 import Sidebar from './Sidebar'
 import './Home.css'
 
-function Home() {
+function Home({ openMessageCreator }) {
     return (
         <div className="home">
             <Sidebar />
             <Feed />
-            <Contacts />
+            <Contacts openMessageCreator={openMessageCreator}/>
         </div>
     )
 }
