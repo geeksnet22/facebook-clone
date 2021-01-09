@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './App.css'
 import Header from './components/Header'
-import Sidebar from './components/Sidebar'
-import Feed from './components/Feed'
-import Contacts from './components/Contacts'
 import Login from './components/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser, login, logout } from './features/userSlice'
@@ -13,6 +10,8 @@ import Messages from './components/Messages'
 import NewMessageCreator from './components/NewMessageCreator'
 import LikesPopout from './components/LikesPopout'
 import UserProfile from './components/UserProfile'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import Home from './components/Home'
 
 function App() {
 
@@ -117,29 +116,29 @@ function App() {
       ) : (
         <>
           <Header toggleDropdown={toggleDropdown} 
-                    toggleMessagesMenu={toggleMessagesMenu} />
-          {/* <UserProfile /> */}
-          <div ref={bodyRef} className="body">
-            <Sidebar />
-            <Feed />
-            <Contacts />
-            <Dropdown ref={dropdownRef}/>
-            <NewMessageCreator selectedUsersForMessaging={selectedUsersForMessaging}
-                                setSelectedUsersForMessaging={setSelectedUsersForMessaging} 
+                      toggleMessagesMenu={toggleMessagesMenu} />
+          <Dropdown ref={dropdownRef}/>
+          <NewMessageCreator selectedUsersForMessaging={selectedUsersForMessaging}
+                              setSelectedUsersForMessaging={setSelectedUsersForMessaging} 
+                              openMessageCreator={openMessageCreator} 
+                              hideMessageCreator={hideMessageCreator}
+                              ref={{
+                                  messageCreatorBodyRef: messageCreatorBodyRef,
+                                  messageCreatorHeaderTitleRef: messageCreatorHeaderTitleRef,
+                                  messageCreatorInputRef: messageCreatorInputRef,
+                                  messagesDisplayRef: messagesDisplayRef,
+                                  messagesSectionRef: messagesSectionRef
+                                  }}/>
+          {currentUserId && <Messages currentUserId={currentUserId} 
                                 openMessageCreator={openMessageCreator} 
-                                hideMessageCreator={hideMessageCreator}
-                                ref={{
-                                    messageCreatorBodyRef: messageCreatorBodyRef,
-                                    messageCreatorHeaderTitleRef: messageCreatorHeaderTitleRef,
-                                    messageCreatorInputRef: messageCreatorInputRef,
-                                    messagesDisplayRef: messagesDisplayRef,
-                                    messagesSectionRef: messagesSectionRef
-                                    }}/>
-            {currentUserId && <Messages currentUserId={currentUserId} 
-                                  openMessageCreator={openMessageCreator} 
-                                  ref={messagesRef} />}
-            <LikesPopout />
-          </div>
+                                ref={messagesRef} />}
+          <LikesPopout />
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/user" render={() => (currentUser && <UserProfile user={currentUser}/>)} />
+            </Switch>
+          </Router>
         </>
       )}
     </div>

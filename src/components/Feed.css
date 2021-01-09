@@ -5,16 +5,16 @@
     padding: 0 20px;
 }
 
-.feed__input__container {
+.feed > .feed__input__container {
     display: flex;
 }
 
-.feed__input__container > .feed__input > form {
+.feed > .feed__input__container > .feed__input > form {
     display: flex;
     flex: 1;
 }
 
-.feed__input {
+.feed > .feed__input__container > .feed__input {
     flex: 1;
     margin-left: 10px;
     display: flex;
@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-.feed__input > form > input {
+.feed > .feed__input__container > .feed__input > form > input {
     flex: 1;
     border: none;
     outline: none;
@@ -34,11 +34,11 @@
     font-size: 14px;
 }
 
-.feed__input > form > input::-webkit-input-placeholder {
+.feed > .feed__input__container > .feed__input > form > input::-webkit-input-placeholder {
     color: #ffffff;
 }
 
-.feed__input > form > button {
+.feed > .feed__input__container > .feed__input > form > button {
     flex: 0;
     border: none;
 }

@@ -1,0 +1,44 @@
+.userFeed {
+    border-radius: 20px;
+    width: 500px;
+    padding: 0 20px;
+    margin-top: 15px;
+}
+
+.userFeed > .feed__input__container {
+    display: flex;
+}
+
+.userFeed > .feed__input__container > .feed__input > form {
+    display: flex;
+    flex: 1;
+}
+
+.userFeed > .feed__input__container > .feed__input {
+    flex: 1;
+    margin-left: 10px;
+    display: flex;
+    border-radius: 15px;
+    border: 1px solid black;
+    background-color: var(--searchBackground);
+    align-items: center;
+}
+
+.userFeed > .feed__input__container > .feed__input > form > input {
+    flex: 1;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background-color: var(--searchBackground);
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.userFeed > .feed__input__container > .feed__input > form > input::-webkit-input-placeholder {
+    color: #ffffff;
+}
+
+.userFeed > .feed__input__container > .feed__input > form > button {
+    flex: 0;
+    border: none;
+}

@@ -1,21 +1,18 @@
 import { Avatar } from '@material-ui/core'
-import firebase from 'firebase'
-import React, { useState, useEffect } from 'react'
-import Post from './Post'
-import './Feed.css'
+import React, { useEffect, useState } from 'react'
 import { db } from '../Firebase'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../features/userSlice'
+import firebase from 'firebase'
 import FlipMove from 'react-flip-move'
+import Post from './Post'
+import './UserFeed.css'
 
-function Feed() {
+function UserFeed( {user} ) {
 
-    const user = useSelector(selectUser)
     const [input, setInput] = useState("")
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => (
+        db.collection("posts").where("user.email", "==", user.email).orderBy("timestamp", "desc").onSnapshot((snapshot) => (
             setPosts(snapshot.docs.map((doc) => (
                 {
                     id: doc.id,
@@ -23,7 +20,7 @@ function Feed() {
                 }
             )))
         ))
-    }, []);
+    })
 
     const sendPost = (e) => {
         e.preventDefault()
@@ -35,8 +32,9 @@ function Feed() {
         setInput("")
     }
 
+
     return (
-        <div className="feed">
+        <div className="userFeed">
             <div className="feed__input__container">
                 <Avatar src={user.photoURL} />
                 <div className="feed__input">
@@ -60,4 +58,4 @@ function Feed() {
     )
 }
 
-export default Feed
+export default UserFeed
